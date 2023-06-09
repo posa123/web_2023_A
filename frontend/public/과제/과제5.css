@@ -1,0 +1,31 @@
+@charset "UTF-8";
+.box1{
+	border-left: solid 10px green;
+	padding-left: 20px; 
+		
+}
+.box2{
+	width : 400px;
+	border:solid 1px gray;
+	border-radius: 5px;
+	background-color: #e8e8e8;
+	padding: 40px;
+	
+}
+.contli{
+	margin-bottom: 15px;
+}
+.info{
+	border: solid 2px gray;
+	border-radius: 10px;
+	width: 300px;
+	padding: 10px;
+	margin: 20px 40px;
+}
+.contp{
+	border-bottom: dotted 1px gray;
+	padding-bottom: 10px;
+}
+.conth{
+	text-align: right;
+}

@@ -1,0 +1,17 @@
+@charset "UTF-8";
+.bocckimg{
+	width: 300px;
+}
+.titleno{
+	font-size: 30px;
+	color: orange;
+}
+.contnet{
+	background-color: #0F6878;
+	color: white;
+	padding: 20px;
+	width: 500px;
+}
+.fontc{
+	color: orange;
+}
