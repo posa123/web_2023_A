@@ -1,0 +1,36 @@
+@charset "UTF-8";
+*{ padding: 0px; margin: 0 auto; font-family: "맑은 고딕"}
+
+#footer{
+	display: flex;
+	justify-content:space-around;
+	background-color: #292C32;
+	width: 100%; height: 200px;
+	margin-top: 20px;
+}
+.ft_tel{
+	color:white;
+	padding-top: 50px;
+}
+.ft_center{
+	padding-top: 50px;
+}
+.ft_center a{
+	padding-top: 50px;
+	font-size: 5px;
+	color: white;
+	margin-bottom: 10px;
+}
+li{ list-style-type: none;  }
+.adress{
+	
+	color:white;
+	font-size: 5px;
+}
+.end_logo img{
+	padding-top: 50px;
+	
+}
+.number{
+	font-weight: bold;
+}
