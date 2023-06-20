@@ -327,6 +327,10 @@ li{ list-style-type:none; }
 	text-align: center;
 	font-weight: bold;
 }
+.btnorder{
+   color:red;
+   border-bottom: solid 4px red;
+}
 
 
 /* --------------------로그인end---------------------------------------- */
