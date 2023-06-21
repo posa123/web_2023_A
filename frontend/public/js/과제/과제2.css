@@ -1,0 +1,12 @@
+@charset "UTF-8";
+#main_content{
+	display: flex;
+	justify-content:space-around;
+	width: 1200px;
+}
+.main{
+	display: flex;
+}
+.sign_up{
+
+}
