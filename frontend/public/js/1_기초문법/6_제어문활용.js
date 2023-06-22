@@ -75,36 +75,6 @@ if( int2 > int3){ // 조건3
 }
 console.log( int1 + '' +int2+ '' +int3)
 //문제5
-let int4= Number(prompt('정수1입력 : ')); //4
-let int5= Number(prompt('정수2입력 : ')); //5 
-let int6= Number(prompt('정수3입력 : ')); //6
-let int7= Number(prompt('정수4입력 : ')); //7
-if( int4 > int5 ){
-	let temp2 = int4;
-	int4 = int5;
-	int5 = int6;
-	int7 = temp2;
-}
-if( int4 > int6 ){
-	let temp2 = int4
-	int4 = int6
-	int6 = int7
-	int7 = temp2
-}
-if( int4 > int7){
-	let temp2 = int4
-	int7 = int4
-	int4 = int6
-	int6 = temp2
-}
-if( int5 > int6 ){
-	let temp2 = int5
-	int5 = int6
-	int4 = int6
-	int6 = int7
-	int7 = temp2
-}
-console.log(int4 + ' ' +int5 + ' '+int6 )
 
 
 // 문제 6 : 점수를 입력받아 점수 90점이상 합격 출력 아니면 탈락 출력
