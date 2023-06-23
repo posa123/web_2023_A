@@ -131,7 +131,7 @@ output = ``;
 let line6 = prompt('문제8: ')
 for( let i = 1 ; 1<=line6 ; i++){
 	for( let b = 1 ; b<=i-1 ; b++ ) { output +=` `}
-	for( let s = 1 ; s<=9 ; s++) { output +=`*`}
+	for( let s = 1 ; s<= ; s++) { output +=`*`}
 	output += `\n`
 }
 console.log( output )

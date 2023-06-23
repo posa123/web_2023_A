@@ -12,15 +12,17 @@
       비겼을경우 '무승부' 출력
 */
 // 문제11
-let num1 = Number(prompt('정수 입력 : '))
-let num2 = Number(prompt('정수 입력 : '))
-let num3 = Number(prompt('정수 입력 : '))
+let num1 = Number(prompt('정수 입력 : ')) // 7
+let num2 = Number(prompt('정수 입력 : ')) // 5 
+let num3 = Number(prompt('정수 입력 : ')) // 9
 let max = num1 
 max = max > num2 ? num2 : max
 max = max > num3 ? num3 : max
+let max2 = num2
+max2 = max2 > num3 ? max2 : num3
 
 //
-console.log(' 오름차순 정렬 ' + max ) 
+console.log(' 오름차순 정렬 ' + max + max2 ) 
 // 문제12
 
 
