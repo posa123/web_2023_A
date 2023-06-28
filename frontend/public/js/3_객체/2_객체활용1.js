@@ -44,11 +44,7 @@ function 등록(){ console.log('등록()함수실행')
 			}
 		}
 */
-	
 		
-	
-
-	
 } // f end // mid,mpwd,member 초기화/사라짐 
 
 // 2. 로그인 [ 실행조건 : 로그인 버튼을 클릭했을떄 ]
