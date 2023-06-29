@@ -4,22 +4,21 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
-	<div class="mm">
+<body style="display: flex;">
 		<div>
-			<h3>글쓰기 페이지</h3>
-			작성자:<input id="name" type="text">
-			비밀번호:<input id="pw" type="password">
-			제목:<input id="title" type="text">
-			내용:<input id="data" type="text">
-			<button onclick="글내용()">글 등록</button>
+			작성자:<input id="name" type="text"> <br/>
+			비밀번호:<input id="pw" type="password"> <br/> 
+			제목:<input id="title" type="text"> <br/>
+			내용:<textarea id="content" rows="20" cols="50"></textarea> <br/>
+			<button onclick="onwirte()">글 등록</button>
 		</div>
 		<div>
-			<table class="list">
+			<table id="boardTable" border="1">
 			</table>
 		</div>
-		<div></div>
-	</div>
+		<div id="viewbox">
+
+		</div>
 	<script src="과제4.js" type="text/javascript"></script>
 </body>
 </html>
