@@ -1,0 +1,18 @@
+@charset "UTF-8";
+*{margin: 0; padding: 0;}
+#main{
+	display: flex;
+	width: 1200px;
+}
+.wirte{
+	border: solid 1px;
+	width: 400px;
+}
+.print{
+	border: solid 1px;
+	width: 400px;
+}
+#viewbox{
+	border: solid 1px;
+	width: 400px; 
+}
