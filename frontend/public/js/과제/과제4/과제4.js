@@ -3,6 +3,9 @@ let boardlist = []
 // * JS열렸을때 최초 1번 실행
 onPrint()
 function onwirte(){ console.log('등록함수실행')
+
+	document.querySelector('#main').style = 'color: blue; background-color: yellow';
+	
 	
 	let name = document.querySelector('#name').value;
 	let pw = document.querySelector('#pw').value;
