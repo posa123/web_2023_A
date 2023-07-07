@@ -44,7 +44,7 @@
 	<div class="container">	<!-- 현재 게시물출력 페이지 전체 구역  -->
 	
 		<!-- 버튼 -->
-		<a href="write.jsp"> <button type="button" class="btn btn-outline-info">글쓰기</button> </a>
+		<a href="write.jsp"> <button type="button" class="btn btn-outline-info my-3">글쓰기</button> </a>
 		
 		<table class="table table-striped table-hover table-bordered text-center"> <!-- 테이블  -->
 		
@@ -56,7 +56,7 @@
 			</thead>
 			
 			<tbody class="tcontent">
-				
+				<!-- boardPrint() 함수가 inner 되는 구역 -->
 			</tbody>
 			
 			<tfoot>
@@ -105,6 +105,7 @@
 	
 	<!-- 부트스트랩에서 만든 JS 적용 -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+	<!--  -->
 	<script src="../js/list.js" type="text/javascript"></script>
 </body>
 </html>
