@@ -15,7 +15,7 @@ let loginId = 'blue1234';
 
 /*
 	JS는 HTML 에서 포함된 문서
-		- HTML 새로고침[F5] / 페이지전환[ a ] 되면 JS도 재호출 => 메모리 휘발성/초기화
+		- HTML 새로고침[F4] / 페이지전환[ a ] 되면 JS도 재호출 => 메모리 휘발성/초기화
 		- 영구적인저장[ 백엔드 담당 = DB ]
 		- 브라우저 저장소 : 1.세션 2.쿠키 
 			세션 : 모든 브라우저 꺼지면 초기화
@@ -51,7 +51,7 @@ function onWrite(){
 	
 	// 3. 해당 객체/변수 를 배열에 저장한다.
 		// 1. 기존에 쿠키에서 게시물들이 저장된 boardList 배열 호출한다. * 호출할때 배열/객체포멧으로 변환
-	let boardList = JSON.parse( localStorage.getItem('boardList') );
+	let boardList = JSON.parse( localStorage.getItem('.boardList') );
 		// 2. 만약에 쿠키가 존재하지 않으면 [ 숫자없다는걸 0 / 문자없다는걸 공백 / 객체없다는걸 null 표기 ] 
 	if( boardList == null ) boardList = [ ] // 쿠키가 없으면 빈배열 생성 
 	
