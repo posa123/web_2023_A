@@ -61,11 +61,6 @@ public class Ex4_입출력 {
 			
 			double 더블 = scanner.nextDouble();
 			System.out.println("입력된 더블 : " +더블);
-			
-			
-		
-		
-		
-		
+
 	}
 }
