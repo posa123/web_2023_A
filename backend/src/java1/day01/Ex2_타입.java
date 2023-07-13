@@ -33,6 +33,34 @@ public class Ex2_타입 { // class s
 			// long l2 = 3000000000; 	// 직접 작성한 정수 30억은 INT타입 -> 기본/자동
 			long l3 = 3000000000L; // 직접 작성한 정수를 long 타입 변경 -> 정수 뒤에 L 붙이기
 					System.out.println("l3 : " +l3);
+					
+			// [ p.43 ] char 타입 [ 문자 1개 저장 ]
+			char c1 = 'A'; // 문자 : '' vs 문자열 : ""
+				System.out.println("c1 : " +c1);
+			char c2 = 65;
+				System.out.println("c2 : " +c2);
+			char c3 = '가';
+				System.out.println("c3 : " +c3);
+			char c4 = 44032;
+				System.out.println("c4 : " +c4);
+			// [ p.49 ] String 클래스 [ 문자열 저장 ] " "
+			String str1 = "안녕하세요"; System.out.println("str1 : " +str1);
+			
+			// [ p.45 ] float 타입 [ 소수점 8자리 표현 ] // 데이터 뒤에 f
+			float f1 = 0.123456789123456789f; System.out.println("f1 : " +f1);
+			// double [ 소수점 17자리 표현 ] : * 실수 기본타입
+			double d1 = 0.123456789123456789; System.out.println("d1 : " +d1);
+			// [ p.48 ] boolean 타입 [ true or false ]
+			boolean bool1 = true; System.out.println("bool1 : " +bool1);
+			// [ p.50 ] 제어/이스케이프(기능) 문자
+				// \" :  "출력 // 엔터 : \n\r
+			System.out.println(" \" ' ");
+					// " : 문자열  , ' : 문자
+			System.out.println(" \' "); // ' : 문자
+			System.out.println(" \\ ");
+			System.out.println(" \t "); // \t : 들여쓰기
+			System.out.println(" \n "); // \n : 줄바꿈
+			System.out.println("\r 캐리지 리턴"); // \r : 캐리지 리턴[커서 맨앞으로]
 	} // main e
 } // class e
 
@@ -43,14 +71,19 @@ public class Ex2_타입 { // class s
  		
  					메모리크기		허용범위
  	 	논리타입
+ 	 		boolean 1비트			false[0] / true[1]
  	 	문자타입
+ 	 		char	2바이트		[ 0~65535 ] 유니코드
+ 	 		String  클래스[글자수다름] 제한없음.
  	 	문자열타입
  	 	정수형타입
  	 		byte	1바이트		[ -128 ~ 127 ]		대략 +-100	
  	 		short   2바이트		[-32,768 ~ 32,767 ] 대략 +-3만정도
- 	 		int		4바이트		[ 대략 +- 21억 정도 ] 
+ 	 		*int		4바이트		[ 대략 +- 21억 정도 ] 
  	 		long	8바이트		[ 대략 +- 21억 이상]
  	 	실수타입
+ 	 		float   4바이트		소수점 8자리 표현
+ 	 	 	*double  8바이트 		소수점 17자리 표현
  	 	
  	ex)
  		선물상자 = 변수
@@ -64,6 +97,10 @@ public class Ex2_타입 { // class s
  	 	  	1kb -> 1024kb -> 1mb
  	 	  	1mb -> 1024mb -> 1gb
  	 	
+ 	 	// 인코딩 : 2진수를 문자로 표현하는 방법
+ 	 	 	아스키코드 : 7비트(확장8비트) -> 128문자 표현	1바이트 = 특수문자/숫자/영문
+ 	 	 	유니코드  : 전세계 공용어 문자				2바이트 = 특수문자/숫자/영문/한글
+ 	 	 
  		
   
   
