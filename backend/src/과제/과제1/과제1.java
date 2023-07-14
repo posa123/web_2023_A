@@ -2,6 +2,31 @@ package 과제.과제1;
 
 public class 과제1 { // class s
 	public static void main(String[] args) { // main s
+		// 캡처2 확인문제
+		// 문제1 : 4
+			// 1 : 변수는 하나의 값만 저장o vs 배열은 여러개 값 저장
+			// 2 : int 타입으로 선언했으면 int 허용범위내 데이터만 저장
+			// 3 : { } 안에서 선언된 변수는 밖으로 나올수 없다.
+			// 4 : x
+		// 문제2 : 2,3,6,7
+		int modelName; int class; int 6hour; int $value;
+		int _age;	int #name	int int;
+			// 미리 정해진 단어 : 문법적으로 사용되는 단어 = 키워드
+		// 문제3 :
+		/*
+		  정수타입 : 	byte	short	int		long
+		  					char
+		  실수타입 :					float	double
+		  논리타입 : boolean
+		*/		
+		// 문제4
+			// 타입 : int , double
+			// 변수명 : age , price
+			// 리터럴 : 10 , 3.14
+		// 문제5
+		 		
+		  
+		 
 	} // main e
 } //class e
 /*
@@ -32,13 +57,14 @@ public class 과제1 { // class s
 		
 	2. (1인) p.73 ~ p.76 풀이 => 카톡방 과제1 git주소
 		
-		// 문제1. 답:4	풀이: 변수는 초기값이 저장되지 않은 상태에서 읽을 수 없다.
-		// 문제2. 답:2,3,6,7 풀이 : 클래스class,숫자6hour,id #name,타입int
+		// 문제1. 답:4
+		// 문제2. 답:2,3,6,7 
 		// 문제3. 답:
 		 			1byte		2byte		4byte		8byte
 		 			byte	   short,char	int			long
 		 									float		double	
 		 			boolean		
   		// 문제4. 타입: int,double 변수이름: age,price 리터럴:10,3.14
+  		// 
  */
  
