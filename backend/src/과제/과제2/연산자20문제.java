@@ -30,7 +30,7 @@ public class 연산자20문제 {
 			System.out.println("----------------------------------------");
 		*/
 		//------ 문제3 여기에 풀이-------//
-		System.out.println("-------------------문제풀이3---------------------");
+		/*System.out.println("-------------------문제풀이3---------------------");
 		
 		// 1. 입력
 			// 1. 입력객체 : 상단에
@@ -43,51 +43,106 @@ public class 연산자20문제 {
 			// int * double 연산시 => 결과 double
 			// double은 long에 대입 x => 강제변환(캐스팅)
 		// 3. 출력
-		System.out.println("실수령액 : " +실수령액);
+		System.out.println("실수령액 : " +실수령액);*/
 		//------ 문제4 여기에 풀이-------//
-		
-		
+		/*
+		System.out.println("----------문제4-------------");
+		// 1. 입력
+			// 1. 입력객체
+		System.out.println("금액: "); int 금액 = scanner.nextInt();
+		// 2. 계산
+			// 십만원
+		System.out.println("십만원 : " + (금액/100000) +"장");
+		금액 -= (금액/100000) * 100000; // 원금에서 3십만원 제외
+			// 만원
+		System.out.println("만원 : " + (금액/10000) +"장");
+		금액 -= (금액/10000) * 10000; // 원금에서 5만원 제외
+			// 천원
+		System.out.println("천원 : " + (금액/1000) + "장");
+		금액 -= (금액/1000) * 1000;
+			// 백원
+		System.out.println("백원 : " + (금액/100) + "장");
+		// 3. 출력*/
 		//------ 문제5 여기에 풀이-------//
-		
-		
+		// 배수공식 : 값 % 수 = 나머지	*만약에 나머지가 0 이면 수는 그 값의 배수
+		// 홀짝공식 : 값 % 2 = 1 or 0 *만약에 나머지가 1이면 값은 홀수 / 0이면 값은 짝수
+		/*System.out.println("--------------문제5--------------");
+		int 정수5 = scanner.nextInt();
+		char result = (정수5 % 7 == 0 ) ? 'O' : 'X';
+		System.out.println( "문제5결과 : " +result );
 		//------ 문제6 여기에 풀이-------//
-		
+		System.out.println("--------------문제6--------------");
+		System.out.println("정수6 : ");	int 정수6 = scanner.nextInt();
+		System.out.println("문제6 결과 : "+ ((정수6 % 2 == 1) ? "O" : "X"));
 		
 		//------ 문제7 여기에 풀이-------//
-		
+		System.out.println("--------------문제7-------------");
+		System.out.println("정수7 : ");	int 정수7 = scanner.nextInt();
+		System.out.println("문제7 결과 : " + ( 정수7 % 7 == 0 && 정수7 % 2 == 0 ? "O" : "X" ));
 		
 		//------ 문제8 여기에 풀이-------//
-		
-		
+		System.out.println("--------------문제8-------------");
+		System.out.println("정수8 : ");	int 정수8 = scanner.nextInt();
+		System.out.println("문제8 결과 : " + ( 정수8 % 7 == 0 || 정수8 % 2 == 1 ? "O" : "X" ));
+		*/
 		//------ 문제9 여기에 풀이-------//
-		
+		/*
+		System.out.println("----------문제9------------");
+		System.out.println("두개 정수입력: "); int 정수9_1 = scanner.nextInt(); int 정수9_2 = scanner.nextInt();
+		System.out.println("가장큰수: " +( 정수9_1 > 정수9_2 ? 정수9_1 : 정수9_1 < 정수9_2 ? 정수9_2 : "같다"));
 		
 		//------ 문제10 여기에 풀이-------//
-		
+		System.out.println("----------문제10------------");
+		System.out.println("반지름 : ");	double 반지름 = scanner.nextDouble();
+		System.out.println(" 원 넓이 : " +( 반지름*반지름*3.14 ) );
 		
 		//------ 문제11 여기에 풀이-------//
-		
+		System.out.println("----------문제11------------");
+		System.out.print("실수1 : ");	double 실수1 = scanner.nextDouble();
+		System.out.print("실수2 : ");	double 실수2 = scanner.nextDouble();
+		System.out.printf("실수2에서 실수1 비율 계산 : %.6f %%" ,( 실수1/실수2 )*100.0 );
+							// %f : 실수형식	%.6f : 실수 소수좀6자리형식	//0.64 ~~ * 100 => 64.~~
 		
 		//------ 문제12 여기에 풀이-------//
-		
-		
+		System.out.println("----------문제12------------");
+		System.out.print("윗변 : ");	double 윗변 = scanner.nextDouble();
+		System.out.print("밑변 : ");	double 밑변 = scanner.nextDouble();
+		System.out.print("높이 : ");	double 높이 = scanner.nextDouble();
+		System.out.println("사다리꼴 계산 : " + (윗변 + 밑변)*높이 / 2);
+		*/
 		//------ 문제13 여기에 풀이-------//
-		
+		/*
+		System.out.println("----------문제13-----------");
+		System.out.println(" 키 : "); int 키 = scanner.nextInt();
+		System.out.println("표준 체중 : " + (키-100) * 0.9);
 		
 		//------ 문제14 여기에 풀이-------//
-		
-		
+		System.out.println("----------문제14-----------");
+		System.out.println(" 키 : "); int 키2 = scanner.nextInt();
+		System.out.println(" 몸무게 : "); int 몸무게 = scanner.nextInt();
+		System.out.println(" BMI 계산 : " +(몸무게 / ((키2/100)*(키/100) ) ) );
 		//------ 문제15 여기에 풀이-------//
+		System.out.println("----------문제15-----------");
+		System.out.println(" inch : ");	 double 인치 = scanner.nextDouble();
+		System.out.println(" inch --> cm : " +(인치*2.54) + "cm");
 		
 		
 		//------ 문제16 여기에 풀이-------//
-		
+		System.out.print("----------문제16-----------");
+		System.out.print("중간고사 : "); 	int 중간고사 = scanner.nextInt();
+		System.out.print("기말고사 : "); 	int 기말고사 = scanner.nextInt();
+		System.out.print("수행평가 : "); 	int 수행평가 = scanner.nextInt();
+		System.out.printf(" 점수 : %.2f" ,(중간고사*0.3 + 기말고사*0.3 + 수행평가*0.4));
 		
 		//------ 문제17 여기에 풀이-------//
-		
-		
+		int x = 10;
+		int y = x-- + 5 + --x;
+		System.out.printf(" x의 값 : %d , y의값 :  %d ", x, y);
+		*/
 		//------ 문제18 여기에 풀이-------//
-		
+		System.out.println("-----------문제18-----------");
+		System.out.print("나이 : "); int 나이 = scanner.nextInt();
+		System.out.println( 나이 >= 40 ? "중년" : 나이 >=20 ? "성인" : 나이 >=10 ? "학생" : "유아" );
 		
 		//------ 문제19 여기에 풀이-------//
 		
