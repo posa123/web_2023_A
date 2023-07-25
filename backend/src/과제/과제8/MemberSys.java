@@ -19,7 +19,7 @@ public class MemberSys { // c s
 			
 			// 3. 입력/선택 경우의수
 			if( ch == 1) {
-				System.out.println("-------------회원가입--------------");
+				System.out.println("------------- 회원가입 --------------");
 				// 1. 각 입력받아 저장
 				System.out.println("아이디 : "); String inputId = sc.next();
 				System.out.println("비밀번호 : "); String inputPw = sc.next();
@@ -42,7 +42,7 @@ public class MemberSys { // c s
 				} // f end
 			} // if end
 			else if( ch == 2) {
-				System.out.println("------------로그인----------------");
+				System.out.println("------------ 로그인 ----------------");
 				
 				// 1. 입력받기
 				System.out.println("아이디 : "); String inputId = sc.next();
