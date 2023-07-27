@@ -34,31 +34,32 @@ public class MemberSys {
 	}
 	
 	static void 회원가입 () {
-		System.out.println("아이디 : "); 
+		System.out.print("아이디 : "); 
 		String id = sc.next();
-		System.out.println("비밀번호 : ");
+		System.out.print("비밀번호 : ");
 		String password = sc.next();
-		System.out.println("이름 : ");
+		System.out.print("이름 : ");
 		String name = sc.next();
-		System.out.println("전화번호 : ");
+		System.out.print("전화번호 : ");
 		String phone = sc.next();
-		System.out.println("나이 : ");
+		System.out.print("나이 : ");
 		int age = sc.nextInt();
 		
 		Member member = new Member(id,password,name,phone,age);
-		
+		// 회원의 1개의 객체를 배열 저장
 		for( int i=0; i<memberList.length; i++) {
 			if( memberList[i] == null) {
 				memberList[i] = member;
+				break;
 			}
 		}
-		
+		System.out.println( Arrays.toString(memberList) );
 		
 	}
 	static void 로그인 () { 
-		System.out.println("아이디 : ");
+		System.out.print("아이디 : ");
 		String id = sc.next();
-		System.out.println("비밀번호 : ");
+		System.out.print("비밀번호 : ");
 		String password = sc.next();
 		
 		int login = -1;
@@ -76,13 +77,17 @@ public class MemberSys {
 		
 	}
 	static void 아이디찾기 () {
-		System.out.println("이름 : "); String name = sc.next();
-		System.out.println("전화번호 : "); String phone = sc.next();
+		System.out.print("이름 : "); String name = sc.next();
+		System.out.print("전화번호 : "); String phone = sc.next();
 		for( int i=0 ; i<memberList.length; i++) {
 			if( memberList[i] != null && memberList[i].name.equals(name) && memberList[i].phone.equals(phone) ) {
 				System.out.println("아이디 : " +memberList[i].id );
-				return;
+				
 			}
+			else { 
+				System.out.println("안내) 이름 또는 전화번호가 일치하지않습니다."); 
+				return;
+			} 
 		}
 	}
 	static void 비밀번호찾기 () {
@@ -95,8 +100,6 @@ public class MemberSys {
 				System.out.print( (int)(Math.random()*10) );
 				System.out.print( (int)(Math.random()*10) );
 				System.out.print( (int)(Math.random()*10) );
-				
-				
 				return;
 			}
 				
