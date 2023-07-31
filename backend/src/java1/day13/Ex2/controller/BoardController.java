@@ -36,8 +36,12 @@ public class BoardController {
 		return boardDto;
 	}	
 	// 글수정 처리 기능함수[ U ]
-	public void updateLogic() {
+	public boolean updateLogic( int index , String content , String writer) {
+		// 1. 입력받은 인덱스의 게시물을 호출해서 새로운 입력받은 값으로 대입
+		BoardDao.getInstance().boardDtoList.get(index).setContent(content);
+		BoardDao.getInstance().boardDtoList.get(index).setWriter(writer);
 		
+		return true;
 	}
 	// 글삭제 처리 기능함수[ D ]
 	public boolean deleteLogic( int index ) {

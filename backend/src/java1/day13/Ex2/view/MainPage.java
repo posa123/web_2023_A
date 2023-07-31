@@ -25,10 +25,10 @@ public class MainPage {
 			System.out.println("\n\n>>>>>>>> 방문록 프로그램 >>>>>>>");
 			System.out.print("1.글등록 2.글보기 3.글수정 4.글삭제 선택>");
 			int ch = sc.nextInt();
-			if( ch == 1) {writeView();}
-			if( ch == 2) {printView();}
-			if( ch == 3) {updateView();}
-			if( ch == 4) {deleteView();}
+			if( ch == 1 ) {writeView();}
+			if( ch == 2 ) {printView();}
+			if( ch == 3 ) {updateView();}
+			if( ch == 4 ) {deleteView();}
 			
 			
 			
@@ -67,8 +67,16 @@ public class MainPage {
 	}
 	// 글수정 페이지 입출력 함수
 	public void updateView() {
+		System.out.println("안내] 방문록 수정 페이지");
+		System.out.println("수정할 방문록 인덱스 번호 : "); int index = sc.nextInt();
+		sc.nextLine();
+		System.out.println("수정할 내용 : ");	String content = sc.nextLine();
+		System.out.println("수정할 작성자 : "); String writer = sc.next();
 		// v -> c
-		BoardController.getInstance().updateLogic();
+		boolean result = BoardController.getInstance().updateLogic( index , content , writer);
+		
+		if( result ) {System.out.println("안내] 수정 성공 ");}
+		else {System.out.println("안내] 수정 실패 ");}
 	}
 	// 글삭제 페이지 입출력 함수
 	public void deleteView() {
