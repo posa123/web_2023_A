@@ -21,7 +21,15 @@ public class MemberController { // 기능처리(로직) 담당하는 클래스 /
 		}
 		return false;
 	}
-	void loginLogic() {}
+	public boolean loginLogic( String id , String pw) {
+		for( int i = 0 ; i<MemberDao.memberList.length ; i++) {
+			if(MemberDao.memberList[i] != null &&
+					MemberDao.memberList[i].getId().equals(id) &&
+						MemberDao.memberList[i].getPassword().equals(pw) )
+				return true;
+		}
+		return false;
+	}
 	void findIdLogic() {}
 	void findPwLogic() {}
 }

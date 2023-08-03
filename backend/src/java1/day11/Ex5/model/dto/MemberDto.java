@@ -50,5 +50,11 @@ public class MemberDto { // 데이터 모델/형식 이동 객체
 	public void setAge(int age) {
 		this.age = age;
 	}
+	@Override
+	public String toString() {
+		return "MemberDto [id=" + id + ", password=" + password + ", name=" + name + ", phone=" + phone + ", age=" + age
+				+ "]";
+	}
+	
 	
 }

@@ -48,7 +48,7 @@ public class MemberSys { // c s
 				int login = -1; // 로그인 여부를 저장하는 변수 -1: 못찾았다 0이상이면 찾고 찾은 인덱스번호 저장 = 로그인성공 기록
 				for( int i=0; i<memberList.length; i++) {
 					// 만약에 i번째 객체의id필드와 입력받은 아이다와 같고 i번째 객체의pw필드와 입력받은 비밀번호와 같으면
-					if( memberList[i]!= null && // 비어 있는 인덱스는 검살필요가 없다 !!! // i번째 인덱스가 비어있지 않고
+					if( memberList[i]!= null && // 비어 있는 인덱스는 검사할필요가 없다 !!! // i번째 인덱스가 비어있지 않고
 							memberList[i].id.equals(inputId) && 
 							memberList[i].password.equals(inputPw)) {
 						login = i;// 로그인 성공후 변수에 성공한 인덱스 저장 = 추후에 로그인 상태 활용	
