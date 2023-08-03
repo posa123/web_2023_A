@@ -5,3 +5,4 @@ public class VeryImportantPerson extends Member {
 							// public final class Member{} : 불가능
 	
 }
+                                                                       
