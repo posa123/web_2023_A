@@ -10,7 +10,7 @@ public class MemberController {
 	private MemberController() {};
 	
 	// 2. 회원가입
-	public void signupLogic( String id , String pw , String name , String phone ) {
+	public boolean signupLogic( String id , String pw , String name , String phone ) {
 		System.out.println("--- signupLogic컨트롤 도착 ");
 		System.out.println( id + pw + name + phone);
 		// 유효성검사 했다치고
@@ -18,13 +18,17 @@ public class MemberController {
 		MemberDto dto = new MemberDto(0, id, pw, name, phone);
 			// 1. 회원가입시 회원번호는 자동[auto_increment]이므로 필요 없으므로 0
 		// 2. Dao에게 전달
-		MemberDao.getInstance().signupSQL( dto );
+		boolean result = MemberDao.getInstance().signupSQL( dto );
+		
+		// 3. 결과를 view 에게 전달
+		return result;
 	}
 	
 	// 3. 로그인
-	public void loginLogic( String id ,String pw) {
+	public boolean loginLogic( String id ,String pw) {
 		System.out.println("--- loginLogic컨트롤 도착 ");
-		System.out.println( id + pw);
-		MemberDao.getInstance().loginSQL( id , pw );
+		System.out.println( id + pw );
+		boolean result = MemberDao.getInstance().loginSQL( id , pw );
+		return result;
 	}
 }
