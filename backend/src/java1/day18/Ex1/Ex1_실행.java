@@ -16,6 +16,19 @@ public class Ex1_실행 {
 		rc = new Audio();
 		
 		rc.turnOn();
+		
+		// 5. 리모콘의 상수필드 호출
+		System.out.println("리모콘의 최대 불륨 : " + rc.MAX_VOLUME );
+		System.out.println("리모콘의 최저 불륨 : " + rc.MIN_VOLUME );
+		
+		// 6. 메소드 실행
+		rc.setVolume(100);
+		
+		// 7. 리모콘 교체
+		rc = new Television();
+		rc.setVolume( -10 );
+		
+		
 		/*
 		 		인터페이스			vs		상속
 		 		implements  	vs		extends
