@@ -26,7 +26,7 @@ public class BoardDao extends Dao {
 			ps.setInt(3, boardDto.getMno() );
 			// 4. SQL 실행 / 실행 후 저장된 레코드 개수 반환 
 			int row = ps.executeUpdate();
-			// 5. 만액에 저장된 레코드수가 1개이면 성공 
+			// 5. 만약에 저장된 레코드수가 1개이면 성공 
 			if( row == 1 ) return true;
 		}catch (Exception e) {System.out.println(e);}
 		return false; // 실패
@@ -82,13 +82,17 @@ public class BoardDao extends Dao {
 		 	bview = bview+1;
 		 */
 		try {
+			// SQL작성
 			String sql ="update board set bview = bview+1 where bno ="+bno;
+			// 2. 작성한 SQL 조작할 인터페이스PS 객체 반환한다.
 			ps = conn.prepareStatement(sql);
+			// 4. SQL 실행 / 실행 후 저장된 레코드 개수 반환 
 			int row = ps.executeUpdate();
+			// 5. 만약에 저장된 레코드수가 1개이면 성공
 			if( row == 1) return true;
 			
 		} catch (Exception e) { System.out.println(e); }
-		return false;
+		return false; // 실패
 	}
 	// 12. boardUpdate : 게시물 수정 
 	public void boardUpdate() {}
