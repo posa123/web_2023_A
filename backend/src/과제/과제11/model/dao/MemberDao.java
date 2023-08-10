@@ -62,7 +62,7 @@ public class MemberDao extends Dao {
 				//									  .next()	 .next()	 .next()
 			if( rs.next() ) { // 로그인SQL 결과레코드는 1개 또는 0개 이므로 if 사용해서 .next() 1번 호출 해서
 										// next() 다음레코드가 존재하면 true / false
-				return rs.getInt(1); // 로그인 성공 
+				return rs.getInt(1); // 검색된 회원번호(첫번째필드) 를 반환
 			}
 			
 		}catch (Exception e) { System.out.println(e); }
@@ -107,44 +107,51 @@ public class MemberDao extends Dao {
 		return null;  // 실패 
 	}
 	
-	// 6. 
+	// 6. 회원번호를 가지고 회원정보 찾기.. 회원번호가 존재하는 레코드 찾기 
 	public MemberDto info( int mno ) {
 		try {
-			String sql = "select * from member where mno = ?";// 1 . SQL작성
-			ps = conn.prepareStatement(sql); // 2. SQL조작할 객체
-			ps.setInt(1, mno); // SQL조작
-			rs = ps.executeQuery(); // 4. SQL실행 // 5. SQL결과 조작 객체
-			if( rs.next() ) {	// 6. SQL결과 조작 // 만약에 다음 레코드가 존재하면
-				// 현재 레코드를 DTO로 만들기
-				// *현재 레코드[ 1:회원번호 , 2:아이디 , 3:비밀번호 4:이름 5:전화번호 ]
-				MemberDto dto = new MemberDto(rs.getInt(1),rs.getString(2) ,rs.getString(3),rs.getString(4),rs.getString(5));
+			String sql ="select * from member where mno =? ";// 1. SQL작성 
+			ps = conn.prepareStatement(sql); // 2. SQL조작할 객체 
+			ps.setInt( 1 , mno); // 3. SQL조작 
+			rs = ps.executeQuery(); // 4. sql 실행 // 5. sql결과 조작 객체 
+			if( rs.next() ) { // 6. sql결과 조작  // 만약에 다음 레코드가 존재하면
+				// * 현재 레코드[ 필드순서 1:회원번호 , 2:아이디 3:비밀번호 4:이름 5:전화번호]를 DTO로 만들기 
+				MemberDto dto = new MemberDto(
+						rs.getInt(1) , rs.getString(2), 
+						rs.getString(3) , rs.getString(4), 
+						rs.getString(5) );
 				return dto;
 			}
-		} catch (Exception e) { System.out.println(e); }
-		return null;	// 실패
+		}
+		catch (Exception e) {System.out.println(e);}
+		return null; // 실패 
 	}
+	
 	// 7.
 	public boolean infoUpdate( String newPw , int mno ) {
 		try {
-			String sql = "update member set mpw = ? where mno = ?";
-			ps = conn.prepareStatement(sql);	// 2.작성한 SQL 조작할 객체
-			ps.setString(1, newPw); ps.setInt(2, mno);
-			int row = ps.executeUpdate();// 4. SQL실행
-			if( row == 1 )return true; // 성공
-		} catch (Exception e) { System.out.println(e); }
-		return false; // 실패	
+			String sql = "update member set mpw = ? where mno = ? ";	// 1.SQL작성한다.
+			ps = conn.prepareStatement(sql); // 2.작성한 SQL 조작할 객체
+			ps.setString( 1 , newPw ); ps.setInt( 2, mno); // 3. SQL 조작 
+			int row = ps.executeUpdate(); // 4.SQL실행 [ 업데이트한 레코드 개수 반환 ]
+			if( row == 1 ) return true; // 성공 
+		}catch (Exception e) {System.out.println(e);}
+		return false; // 실패 
 	}
+	
 	// 8.
-	public boolean infoDelete( int mno) {
+	public boolean infoDelete( int mno ) {
 		try {
-			String sql = "delete from member where mno = ?";
+			String sql = "delete from member where mno = ? ";
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, mno);
-			int row = ps.executeUpdate();	// [ 삭제한 레코드 개수 반환 ]
+			ps.setInt( 1 , mno); 
+			int row = ps.executeUpdate();	// [ 삭제한 레코드 개수 반환 ] 
 			if( row == 1 ) return true;
-		} catch (Exception e) { System.out.println(e); }
-		return false; // 실패
+		}catch (Exception e) {System.out.println(e);}
+		return false; // 실패 
 	}
+	
+	
 	
 }
 

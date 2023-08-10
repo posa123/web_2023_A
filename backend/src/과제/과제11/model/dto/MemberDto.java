@@ -8,9 +8,9 @@ public class MemberDto {
 	private String mname;
 	private String mphone;
 	// 2. 생성자
-		// 1. 기본생성자
+		// 1. 기본생성자 
 	public MemberDto() { }
-		// 2. 풀생성자
+		// 2. 풀생성자 
 	public MemberDto(int mno, String mid, String mpw, String mname, String mphone) {
 		super();
 		this.mno = mno;
@@ -18,9 +18,9 @@ public class MemberDto {
 		this.mpw = mpw;
 		this.mname = mname;
 		this.mphone = mphone;
-	}	
-	// 3. 메소드
-		// 1. setter and getter
+	}
+	// 3. 메소드 
+		// 1. setter and getter 
 	public int getMno() {
 		return mno;
 	}
@@ -51,12 +51,10 @@ public class MemberDto {
 	public void setMphone(String mphone) {
 		this.mphone = mphone;
 	}
+		// 2. toString()
 	@Override
 	public String toString() {
 		return "MemberDto [mno=" + mno + ", mid=" + mid + ", mpw=" + mpw + ", mname=" + mname + ", mphone=" + mphone
 				+ "]";
 	}
-	
-		// 2. toString()
-	
 }
