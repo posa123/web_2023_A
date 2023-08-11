@@ -155,8 +155,11 @@ public class LoginPage {
 		else if( result == 3 ) { System.err.println("경고] 본인 글만 삭제 가능 합니다. ");}
 	}
 	// 14. 쪽지보내기 페이지
+
 	
 	// 15. 쪽지확인 페이지 // + 쪽지답장 보내기
+	
+	
 	
 	// 16. 쪽지답장 보내기 페이지
 	
