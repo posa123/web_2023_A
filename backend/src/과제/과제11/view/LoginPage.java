@@ -21,16 +21,18 @@ public class LoginPage {
 		
 		while( MemberController.getInstance().getLoginSession() != 0 ) { // 로그인이 되어 있는 경우에만 메뉴 반복 
 			
-			boardPrint();
+			boardPrint(); // 모든 글 조회
 			
 			System.out.println("\n\n ===== ===== ===== ===== ");
-			System.out.print("1.로그아웃 2.회원정보 3.글쓰기 4.게시물조회 선택 : ");
+			System.out.print("1.로그아웃 2.회원정보 3.글쓰기 4.글조회 선택 : ");
 			try {
+				
 				int ch = sc.nextInt();
 				if( ch == 1 ) { MemberController.getInstance().logOut(); }
 				if( ch == 2 ) { info(); }
 				if( ch == 3 ) { boardWrite(); }
 				if( ch == 4 ) { boardView(); }
+				
 			}catch( Exception e ) {
 				System.out.println("경고] 잘못된 입력입니다. ");
 				sc = new Scanner(System.in); 
@@ -112,33 +114,51 @@ public class LoginPage {
 					dto.getBno() , dto.getBview() , dto.getBdate() , dto.getMid() , dto.getBtitle() );
 		}
 	}
-	// 11. boardView : 개별 게시물 출력 
+	// 11. boardView : 개별 게시물 출력
 	public void boardView() {
-		System.out.println("--------- post VIEW ---------- ");
-		// 1. 보고자하는 게시물의 게시물번호를 입력받기 [ 식별번호 ]
-		System.out.println("게시물번호 : "); int bno = sc.nextInt();
-		// 2.
+		System.out.println(" ----- post VIEW ----- ");
+		// 1. 보고자하는 게시물의 게시물번호를 입력받기[ 식별번호] 
+		System.out.print("게시물번호 : "); int bno = sc.nextInt();
+		// 2. 
 		BoardDto result = BoardController.getInstance().boardView(bno);
-		// 3.
-		System.out.printf("bno : %3s view : %3s mid : %10s date : %19s" ,
-				result.getBno() , result.getBview() , result.getMid() , result.getBdate());
-		System.out.printf("title : %s \n" ,result.getBtitle());
-		System.out.printf("content : %s \n" ,result.getBcontent());
+		// 3. 출력 
+		System.out.printf("bno : %-3s view : %-3s mid : %-10s date : %-19s \n" , 
+						result.getBno() , result.getBview() , 
+						result.getMid() , result.getBdate() );
+		System.out.printf("title : %s \n" , result.getBtitle() );
+		System.out.printf("content : %s \n " , result.getBcontent() );
 		
-		// 4. 추가메뉴
-		System.out.println("1.뒤로가기 2.수정 3.삭제 선택> "); int ch = sc.nextInt();
-		if( ch==1 ) {}
-		if( ch==2 ) {boardUpdate();}
-		if( ch==3 )	{boardDelete();}
+		// 4. 추가메뉴 
+		System.out.print("1.뒤로가기 2.수정 3.삭제 선택> "); 
+		int ch = sc.nextInt();
+		if( ch == 1 ) {}
+		if( ch == 2 ) { boardUpdate( bno , result.getMno() ); } // 보고 있는 게시물 번호와 작성자회원번호
+		if( ch == 3 ) { boardDelete( bno , result.getMno() ); }
 	}
-	// 12. boardUpdate : 게시물 수정 
-	public void boardUpdate() {
-		
+	// 12. boardUpdate : 게시물 수정 [ 게시물번호 식별해서 제목이랑 내용만 수정 -> 로그인된 사람과 작성자가 일치할경우 가능하도록  ]
+	public void boardUpdate( int bno , int mno ) {
+		System.out.println(" ----- post update ----- ");
+		sc.nextLine();
+		System.out.print("수정할 제목 > "); 		String title = sc.nextLine();
+		System.out.print("수정할 내용 > "); 		String content = sc.nextLine();
+		int result = BoardController.getInstance().boardUpdate(  bno ,  mno ,  title ,  content );
+		if( result == 1 ) {System.out.println("안내] 글 수정 성공 ");}
+		else if( result == 2 ) { System.out.println("안내] 글 수정 실패 : 관리자 오류 ");}
+		else if( result == 3 ) { System.err.println("경고] 본인 글만 수정 가능 합니다. ");}
+		else if( result == 4 ) { System.err.println("경고] 수정할 제목을 1~50글자 사이로 입력해주세요.");}
 	}
-	// 13. boardDelete : 게시물 삭제
-	public void boardDelete() {
-		
+	// 13. boardDelete : 게시물 삭제 [ 게시물번호 식별해서 삭제 -> 로그인된 사람과 작성자가 일치할경우 가능하도록 ]
+	public void boardDelete( int bno , int mno ) {
+		int result = BoardController.getInstance().boardDelete( bno , mno );
+		if( result == 1) {System.out.println("안내] 글 삭제 성공");}
+		else if( result == 2 ) { System.out.println("안내] 글 삭제 실패 : 관리자 오류 ");}
+		else if( result == 3 ) { System.err.println("경고] 본인 글만 삭제 가능 합니다. ");}
 	}
+	// 14. 쪽지보내기 페이지
+	
+	// 15. 쪽지확인 페이지 // + 쪽지답장 보내기
+	
+	// 16. 쪽지답장 보내기 페이지
 	
 }
 

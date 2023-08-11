@@ -26,12 +26,12 @@ public class BoardDao extends Dao {
 			ps.setInt(3, boardDto.getMno() );
 			// 4. SQL 실행 / 실행 후 저장된 레코드 개수 반환 
 			int row = ps.executeUpdate();
-			// 5. 만약에 저장된 레코드수가 1개이면 성공 
+			// 5. 만액에 저장된 레코드수가 1개이면 성공 
 			if( row == 1 ) return true;
 		}catch (Exception e) {System.out.println(e);}
 		return false; // 실패
 	}
-	// 10. boardPrint : 모든 게시물 출력 [ 반환타입 : 
+	// 10. boardPrint : 모든[여러개] 게시물 출력 [ 반환타입 : 
 	// public BoardDto[] boardPrint() {
 	public ArrayList<BoardDto> boardPrint() {
 		ArrayList<BoardDto> list = new ArrayList<>(); // 여러개 BoardDto 를 저장할 리스트객체 선언 
@@ -57,48 +57,73 @@ public class BoardDao extends Dao {
 	
 	
 	
-	// 11. boardView : 개별 게시물 출력 
-	public BoardDto boardView( int bno ) {
+	// 11. boardView : 개별[1개] 게시물 출력 
+	public BoardDto boardView(  int bno ) {
+		
+		// boardViewCount( bno ); // *게시물 조회전 조회수 증가 함수 호출 
+		
 		try {
-			String sql ="select b.*, m.mid from board b natural join member m where b.bno =?";
+			String sql ="select b.* , m.mid from board b natural join member m where b.bno = ?";
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, bno);
+			ps.setInt( 1 , bno );
 			rs = ps.executeQuery();
-			if( rs.next() ) {
+			if( rs.next() ) { // 레코드1개 --> Dto 변환 
 				BoardDto dto = new BoardDto(
-					rs.getInt(1) , rs.getString(2) , rs.getString(3), 
-					rs.getString(4), rs.getInt(5), rs.getInt(6), rs.getString(7) );
-				boardViewCount( dto.getBno()); // 조회수 증가 함수 호출
+						rs.getInt(1) , rs.getString(2) , rs.getString(3), 
+						rs.getString(4), rs.getInt(5), rs.getInt(6), rs.getString(7) );
+				boardViewCount( bno ); // *게시물 조회후 조회수 증가 함수 호출 
 				return dto;
 			}
-		} catch (Exception e)  {System.out.println(e); }
+		}catch (Exception e) {System.out.println(e);}
 		return null;
 	}
-	// 11-2 조회수증가함수
-	public boolean boardViewCount( int bno ) {
-		/*
-		 	JAVA
-		 	int bview = 3
-		 	bview = bview+1;
-		 */
-		try {
-			// SQL작성
-			String sql ="update board set bview = bview+1 where bno ="+bno;
-			// 2. 작성한 SQL 조작할 인터페이스PS 객체 반환한다.
-			ps = conn.prepareStatement(sql);
-			// 4. SQL 실행 / 실행 후 저장된 레코드 개수 반환 
-			int row = ps.executeUpdate();
-			// 5. 만약에 저장된 레코드수가 1개이면 성공
-			if( row == 1) return true;
-			
-		} catch (Exception e) { System.out.println(e); }
-		return false; // 실패
-	}
-	// 12. boardUpdate : 게시물 수정 
-	public void boardUpdate() {}
-	// 13. boardDelete : 게시물 삭제
-	public void boardDelete() {}
 	
+	// 11-2 조회수 증가함수 
+	public boolean boardViewCount( int bno ) { 
+		/*
+		 	[ java , mysql ]
+		 	int i = 3 ;
+		 	i = i+1;
+		 	
+		 	[ java ]
+		 	int i = 3 ;
+		 	
+		 	i += 1;
+		 	[ java ]
+		 	i++;
+		  
+		 */
+		try {	// 					set 수정할필드명 = 기본필드값 + 1
+			String sql = "update board set bview = bview+1 where bno = "+bno;
+			ps = conn.prepareStatement(sql);
+			int row = ps.executeUpdate();
+			if( row == 1 ) return true;
+		}catch (Exception e) {System.out.println(e);}
+		return false;
+	}
+	
+	// 12. boardUpdate : 게시물 수정 [ 인수 : bno , title , content ] / 반환 : true , false 
+	public boolean boardUpdate( BoardDto boardDto ) {
+		try {
+			String sql = "update board set btitle = ? , bcontent = ? where bno = ?";// 1. 
+			ps = conn.prepareStatement(sql); // 2.
+			ps.setInt( 3 , boardDto.getBno() ); 	ps.setString( 1 , boardDto.getBtitle() );	 	ps.setString( 2 , boardDto.getBcontent() ); // 3.
+			int row = ps.executeUpdate(); // 4. //5.  [select -> rs = ps.executeQuery() / insert,update,delete -> int row = ps.executeUpdate() ]
+			if( row == 1 ) return true;	// 6.
+		}catch (Exception e) {System.out.println(e);}
+		return false;   // DB오류 또는 수정된 레코드가 0 이면 실패 
+	}
+	// 13. boardDelete : 게시물 삭제 [ 인수 : bno ] / 반환 : true , false 
+	public boolean boardDelete( int bno ) {
+		try {
+			String sql = "delete from board where bno = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt( 1 , bno); 
+			int row =  ps.executeUpdate();
+			if( row == 1 ) return true;
+		}catch (Exception e) {System.out.println(e);}
+		return false; // DB오류 또는 삭제된 레코드가 0 이면 실패 
+	}
 
 	
 }
@@ -136,10 +161,6 @@ public class BoardDao extends Dao {
 				
   
  */
-
-
-
-
 
 
 
