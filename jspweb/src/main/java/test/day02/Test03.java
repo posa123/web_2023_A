@@ -1,4 +1,4 @@
-package day02;
+package test.day02;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
