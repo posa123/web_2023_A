@@ -18,7 +18,7 @@ public class Ex4_제네릭 {
 	public static void main(String[] args) {
 		
 		// 1. Box 객체 t필드를 Integer 타입으로 선정
-		Box<Integer> box1 = boxing(100);
+		Box<Integer> box1 = boxing(100); // 타입 파라미터에 값 넣으면 (자동으로) 값의 타입으로 Integer 대체
 			// box1 [ Integer t ]
 		int intvalue = box1.getT();
 		System.out.println( intvalue );
