@@ -27,7 +27,7 @@ public class Accountbook extends HttpServlet {
 		String adate = request.getParameter("adate");
 		AccountbookDto accountbookDto = new AccountbookDto(atext, anumber, adate);
 		
-		boolean result = accountbookDto.get
+		boolean result = AccountbookDao.getInstance().awriter(accountbookDto);
 		
 	}
 	// Read
