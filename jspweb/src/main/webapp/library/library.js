@@ -4,9 +4,10 @@ let lno = "";
 function getValue(button) {
     lno = button.textContent;
     alert("눌린 버튼의 값: " + lno);
+    console.log("lno : " +lno)
+    document.querySelector('.lno')
 }
-
-function inroom(lno){ // 입실
+function inroom(){ // 입실
 	
 	document.querySelector('.getValue')
 	let lnameInput = document.querySelector('.lname')
@@ -15,6 +16,7 @@ function inroom(lno){ // 입실
 	console.log(lnameInput)
 	console.log(lno)
 	let info ={ 
+		lno : lno ,
 		lname : lnameInput.value , 
 		lphone : lphoneInput.value, 
 	}
@@ -23,7 +25,8 @@ function inroom(lno){ // 입실
 		url : "/jspweb/LibraryController" ,
 		method : "post",
 		data : info ,
-		success : r => {} ,
+		success : r => {
+		} ,
 		error : e => {}
 	})
 }

@@ -23,13 +23,14 @@ public class MemberFindController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 1. 요청한다.
-		String mid = request.getParameter("mid");
+		String type = request.getParameter("type");
+		String data = request.getParameter("data");
 		// 2. 객체화/유효성검사
 		
 		// 3. DAO 요청 결과
-		boolean result = MemberDao.getInstance().findId(mid);
+		boolean result = MemberDao.getInstance().findIdOrEmail( type , data );
 		// 4. 결과 응답한다.
-		response.setContentType("aplication/json;charset=UTF-8");
+		response.setContentType("application/json;charset=UTF-8");
 		response.getWriter().print(result);
 	}
 
