@@ -1,0 +1,77 @@
+@charset "UTF-8";
+
+/* 공통 css */
+/* 1. 기본값 바깥/안쪽 여백 제거 2.구역사이즈기준 : 테두리기준 */
+*{ 
+	margin: 0px; padding: 0px; 
+	box-sizing: content-box;
+	list-style-type: none;
+	font-family: 'Cafe24Ssurround';
+}
+/* 2. a 태크 색상 , 밑줄제거 */
+a{ color : black; text-decoration: none; }
+/* 3. 외부폰트 = 눈누 */
+@font-face {
+    font-family: 'Cafe24Ssurround';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+/* 4. 웹 컨텐츠 사이즈 */ /* 950px ~ 1350px */
+.webcontainer{ width: 1100px; margin: 0 auto; }
+
+/* 5. 테마색상 */
+
+/*
+	box-sizing : 구역 사이즈 기준
+		box-sizing : content-box; [ 기본값 ]
+			구역사이즈+여백 => 사이즈
+			300+10 => 310
+		box-sizing : border-box;
+			300+10 => 300
+		
+
+*/
+/* ----------------------------------- */
+#header{
+	display: flex; /* 하위요소 가로배치 */
+	align-items: center;
+	justify-content: space-around;
+	margin: 20px 0px 50px 0px; /* 바깥여백 */
+	
+	
+}
+.mainlogo{width: 5%;} /* 로고구역 */
+.mainlogo img{ width: 100%; } 
+.mainmenu{ 
+	display: flex;
+	font-size: 20px;
+} /* 본메뉴 구역 */
+.mainmenu li{ margin-right: 20px; }
+.submenu{
+	display: flex;
+	font-size: 13px;
+	align-items: center;
+} /* 서브메뉴 구역 */
+.submenu li{ margin-right: 10px;}
+
+.hmimg{ /* 회원 프로필 이미지 */
+	width: 50px; height: 50px; /* 가로세로 같으면 정사각형 */
+	border: solid 1px #e8e8e8;
+	border-radius: 50%; /* 둥근모서리 */ 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
