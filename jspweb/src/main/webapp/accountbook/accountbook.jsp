@@ -16,7 +16,8 @@
 			<input class="adate" type="date">
 			<button onclick="awriter()">등록</button>
 		</div> <!-- 등록구역end -->
-		<div> <!-- 출력구역 -->
+		<div class="accountbottom"> <!-- 출력구역 -->
+			
 		</div> <!-- 출력구역 end -->
 	</div> <!-- wrap전체구역 end -->
 

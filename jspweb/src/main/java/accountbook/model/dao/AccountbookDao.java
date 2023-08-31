@@ -9,11 +9,11 @@ public class AccountbookDao extends Dao{
 	
 	public boolean awriter( AccountbookDto accountbookDto ) {
 		try {
-			String sql = "";
+			String sql = "insert into accountbook( atext , anumber , adate ) values(?,?,?)";
 			ps = conn.prepareStatement(sql);
-			ps.setString(2 , accountbookDto.getAtext());
-			ps.setString(3, accountbookDto.getAnumber());
-			ps.setString(4, accountbookDto.getAdate());
+			ps.setString(1 , accountbookDto.getAtext());
+			ps.setString(2, accountbookDto.getAnumber());
+			ps.setString(3, accountbookDto.getAdate());
 			ps.executeUpdate();
 			return true;
 		} catch (Exception e) {System.out.println(e);}
