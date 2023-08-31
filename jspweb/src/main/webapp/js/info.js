@@ -21,10 +21,25 @@ function getInfo(){
 	
 }
 
-
 // 2. 수정
 function mupdate(){
 	
+	// 첨부파일 전송할때.
+		// 1. form 가져오기
+	let form = document.querySelectorAll(".signupForm")[0];
+		console.log(form);
+		// 2. form 데이터 객체화 하기
+	let formdata = new FormData( form );
+		console.log(formdata);
+	$.ajax({
+		url: "/jspweb/MemberInfoController",
+		method : "put",
+		data : formdata ,
+		contentType : false , // 전송타입 form
+		processData : false , 
+		success : r => {} ,
+		error : e => {}
+	});
 	
 }
 

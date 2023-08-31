@@ -128,14 +128,30 @@ public class MemberInfoController extends HttpServlet {
 		// 2. 유효성/객체화 [x]
 		// 3. Dao 처리 [x]
 		// 4. 응답한다.
-		
-		
-		
-		
+
 	}
 	// 3. 회원수정
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+		
+		MultipartRequest multi = new MultipartRequest(
+				request, 
+				request.getServletContext().getRealPath("/member/img"),
+				1024*1024*10,
+				"UTF-8",
+				new DefaultFileRenamePolicy()
+				);
+		// 일반 input : multi.getParameter("input name속성명");
+		// 첨부 input : multi.getFilesystemName("input name속성명");
+		String mimg = multi.getFilesystemName("mimg");
+		
+		// Dao [ 로그인된 회원번호 , 수정할 값 ]
+		Object object = request.getSession().getAttribute("loginDto");
+		MemberDto memberDto = (MemberDto)object;
+		int loginMno = memberDto.getMno();
+		
+		boolean result = MemberDao.getInstance().mupdate(loginMno, mimg);
+		response.setContentType("application/json;charset=UTF-8");
+		response.getWriter().print(result);
 	}
 	// 4. 회원삭제
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -154,8 +170,7 @@ public class MemberInfoController extends HttpServlet {
 		// 4. 응답한다.
 			response.setContentType("application/json;charset=UTF-8");
 			response.getWriter().print(result);
-		
-		
+
 	}
 
 }
