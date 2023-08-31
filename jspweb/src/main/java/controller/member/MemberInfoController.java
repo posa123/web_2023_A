@@ -149,6 +149,11 @@ public class MemberInfoController extends HttpServlet {
 		MemberDto memberDto = (MemberDto)object;
 		int loginMno = memberDto.getMno();
 		
+		// 만약에 수정할 첨부파일 이미지 없으면
+		if( mimg == null) { // 기존 이미지 그대로 사용
+			mimg = memberDto.getMimg(); // 세션에 있던 이미지 그대로 대입
+		}
+		
 		boolean result = MemberDao.getInstance().mupdate(loginMno, mimg);
 		response.setContentType("application/json;charset=UTF-8");
 		response.getWriter().print(result);

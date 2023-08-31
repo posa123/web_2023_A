@@ -37,7 +37,15 @@ function mupdate(){
 		data : formdata ,
 		contentType : false , // 전송타입 form
 		processData : false , 
-		success : r => {} ,
+		success : r => {
+			
+			if( r ){ 
+				alert('수정 성공[다시 로그인해주세요.]'); logout();
+			}else{
+				alert('수정 실패');
+			}
+			
+		} ,
 		error : e => {}
 	});
 	
