@@ -55,7 +55,6 @@ public class MemberFindController extends HttpServlet {
 			// * 세션 상태 확인		// Object 강제 타입변환
 				MemberDto dto = (MemberDto)request.getSession().getAttribute("loginDto");
 				System.out.println( dto );
-			
 		}
 		
 		// 4. 결과를 응답한다.
