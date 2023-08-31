@@ -23,4 +23,16 @@ public class LibraryDao extends Dao{
 		} catch (Exception e) {System.out.println(e);}
 		return false;
 	}
+	public boolean findSeat( int lno ) {
+	try {
+		String sql = "select * from library where lno =?";
+		ps = conn.prepareStatement(sql);
+		ps.setInt(1, lno);
+		rs = ps.executeQuery();
+		if( rs.next() )
+		return true;
+	} catch (Exception e) {System.out.println(e);}
+	return false;
 }
+}
+

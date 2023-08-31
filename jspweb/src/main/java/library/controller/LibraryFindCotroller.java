@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import library.model.dao.LibraryDao;
+import model.dao.MemberDao;
+
 /**
  * Servlet implementation class LibraryFindCotroller
  */
@@ -26,9 +29,14 @@ public class LibraryFindCotroller extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		int lno = Integer.parseInt(request.getParameter("lno"));
+		
+		boolean result = LibraryDao.getInstance().findSeat(lno);
+		
+		response.setContentType("application/json;charset=UTF-8");
+		response.getWriter().print(result);
 	}
+
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

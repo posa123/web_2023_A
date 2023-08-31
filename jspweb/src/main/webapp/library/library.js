@@ -26,7 +26,13 @@ function inroom(){ // 입실
 		method : "post",
 		data : info ,
 		success : r => {
+			if( r ){
+				alert('입실 성공')
+			}else{ alert('입실 실패')}
+			
 		} ,
 		error : e => {}
 	})
 }
+
+
