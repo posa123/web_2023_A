@@ -34,6 +34,19 @@ public class BoardDto {
 		this.mid = mid;
 		this.bcname = bcname;
 	}
+	
+	
+	
+	
+	public BoardDto(String btitle, String bcontent, String bfile, int mno, int bcno) {
+		super();
+		this.btitle = btitle;
+		this.bcontent = bcontent;
+		this.bfile = bfile;
+		this.mno = mno;
+		this.bcno = bcno;
+	}
+
 	// 메소드 [ set/get]
 	public int getBno() {
 		return bno;
