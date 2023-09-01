@@ -8,7 +8,11 @@
 	<link href="../css/list.css" rel="stylesheet">
 </head>
 <body>
-
+	<%@include file="../header.jsp" %>
+	<div class="webcontainer">
+		<h3> 글 목록 페이지 </h3>
+		<button onclick="onWrite()" type="button">글쓰기</button>
+	</div>
 		
 	
 	
@@ -23,6 +27,6 @@
 	
 	
 
-	<script src="../js/list.js" type="text/javascript"> </script>
+	<script src="../js/board/list.js" type="text/javascript"> </script>
 </body>
 </html>

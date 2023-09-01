@@ -1,6 +1,7 @@
 
 // 1. 현재 로그인된 회원정보 요청
 
+let loginState = false; /* 로그인 상태 true : 로그인중 false 비로그인*/
 getMemberInfo(); 
 
 function getMemberInfo(){
@@ -16,11 +17,13 @@ function getMemberInfo(){
 			let html=``;
 			
 			if(r == null){
+				loginState = false;
 				html+=`
 					<li> <a href="/jspweb/member/signup.jsp">회원가입</a> </li>
 					<li> <a href="/jspweb/member/login.jsp">로그인</a> </li>
 					`;
 			}else{ // 로그인		
+				loginState = true;
 				html +=`	
 					<li> ${r.mid} </li>
 					<li> <img class="hmimg" src="/jspweb/member/img/${r.mimg}"/> </li>	
