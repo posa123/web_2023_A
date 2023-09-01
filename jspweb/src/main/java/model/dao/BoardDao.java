@@ -53,7 +53,7 @@ public class BoardDao extends Dao{
 	// 3. 개별 글 출력
 	
 	// 4. 게시물 수정
-	
+	 
 	// 5. 게시물 삭제
 	
 	// 6. 조회수 증가
