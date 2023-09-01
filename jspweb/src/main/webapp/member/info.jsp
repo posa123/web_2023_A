@@ -36,7 +36,6 @@
 
 			<button class="signupbtn"onclick="mupdate()" type="button"> 수정 </button>
 			<button class="signupbtn"onclick="mdelete()" type="button"> 탈퇴 </button>
-			
 		</form>
 	</div>
 	
