@@ -6,7 +6,7 @@ function bwrite() { // write()
 	// 1. form 가져오기
 		// querySelectorAll() : 배열타입으로 여러 dom객체
 		// querySelector() : 객체타입으로 한개 dom객체
-	let form = document.querySelectorAll('.writeFrom')[0];
+	let form = document.querySelectorAll('.writeForm')[0];
 	
 	// 2. form 객체화 하기
 	let formData = new FormData(form);

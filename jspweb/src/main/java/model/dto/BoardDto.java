@@ -14,8 +14,19 @@ public class BoardDto {
     // - 게시물에 추가적으로 표시할 필드들 
     private String mid;
     private String bcname;
+    private String mimg;
     
-    // 생성자 [ 1.빈생성자 2.풀생성자 3.(추후에)작업하면서 필요한 생성자들]
+    
+    
+    public String getMimg() {
+		return mimg;
+	}
+
+	public void setMimg(String mimg) {
+		this.mimg = mimg;
+	}
+
+	// 생성자 [ 1.빈생성자 2.풀생성자 3.(추후에)작업하면서 필요한 생성자들]
     public BoardDto() {
 		// TODO Auto-generated constructor stub
 	}
@@ -46,10 +57,31 @@ public class BoardDto {
 		this.mno = mno;
 		this.bcno = bcno;
 	}
-
+	// - 모든글출력시 사용되는 생성자
+	
+	
+	
+	
 	// 메소드 [ set/get]
 	public int getBno() {
 		return bno;
+	}
+	
+	// 
+	public BoardDto(int bno, String btitle, String bcontent, String bfile, String bdate, int bview, int mno, int bcno,
+			String mid, String bcname, String mimg) {
+		super();
+		this.bno = bno;
+		this.btitle = btitle;
+		this.bcontent = bcontent;
+		this.bfile = bfile;
+		this.bdate = bdate;
+		this.bview = bview;
+		this.mno = mno;
+		this.bcno = bcno;
+		this.mid = mid;
+		this.bcname = bcname;
+		this.mimg = mimg;
 	}
 
 	public void setBno(int bno) {
@@ -132,8 +164,9 @@ public class BoardDto {
 	public String toString() {
 		return "BoardDto [bno=" + bno + ", btitle=" + btitle + ", bcontent=" + bcontent + ", bfile=" + bfile
 				+ ", bdate=" + bdate + ", bview=" + bview + ", mno=" + mno + ", bcno=" + bcno + ", mid=" + mid
-				+ ", bcname=" + bcname + "]";
+				+ ", bcname=" + bcname + ", mimg=" + mimg + "]";
 	}
-    
+
+
 	
 }
