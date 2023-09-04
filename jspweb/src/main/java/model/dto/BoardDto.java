@@ -15,10 +15,30 @@ public class BoardDto {
     private String mid;
     private String bcname;
     private String mimg;
+    // - 조회대상자와 작성자대상자 일치여부
+    private boolean ishost;
     
+    // - 수정시 사용되는 생성자
+    public BoardDto(int bno, String btitle, String bcontent, String bfile, int bcno) {
+		super();
+		this.bno = bno;
+		this.btitle = btitle;
+		this.bcontent = bcontent;
+		this.bfile = bfile;
+		this.bcno = bcno;
+	}
     
-    
-    public String getMimg() {
+    public boolean isIshost() {
+		return ishost;
+	}
+
+	
+
+	public void setIshost(boolean ishost) {
+		this.ishost = ishost;
+	}
+
+	public String getMimg() {
 		return mimg;
 	}
 

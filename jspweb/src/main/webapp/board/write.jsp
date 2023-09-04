@@ -21,7 +21,7 @@
 						<option value="3"> 노하우 </option>
 					</select>
 			제목 : <input type="text" name="btitle" class="btitle">
-			내용 : <textarea name="bcontet" class="bcontent"></textarea>
+			내용 : <textarea name="bcontent" class="bcontent"></textarea>
 			첨부파일 : <input type="file" name="bfile" class="bfile">
 			<button onclick="bwrite()" type="button">글등록</button>
 			<a href="list.jsp">목록보기</a>
