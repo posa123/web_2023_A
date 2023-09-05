@@ -11,34 +11,41 @@ function onWrite() {
 }
 
 /* 게시물 조회 조건 객체 */
-let pageObject = { type : 1 , bcno : 0 , listsize : 10 }
+let pageObject = { type : 1 , bcno : 0 , listsize : 10 , page : 1 }
 	// type : 1:전체조회 , 2:개별조회
 	// bcno : 조회할 카테고리 번호 [ 기본값은 전체보기 ]
 	// listsize : 하나의 페이지에 최대표시할 게시물수 [ 기본값은 10개 ]
+	// page : 조회할 페이지번호
 // 3. 카테고리 버튼을 클릭했을때
 function onCategory(bcno){
 	console.log('클릭된 카테고리 : ' +bcno);
 	pageObject.bcno = bcno; // 조회 조건객체내 카테고리번호를 선택한 카테고리로 변경
-	getList();
+	getList(1);
 } // f end
 // 4. 한페이지 최대 표시할 개수를 변경했을때.
 function onListSize(){
 	pageObject.listsize = document.querySelector('.listsize').value // 선택된 게시물수를 조회조건객체 저장
-	getList(); // 조건이 변경되었기 때문에 다시 출력[ 재렌더링/새로고침 ]
+	getList(1); // 조건이 변경되었기 때문에 다시 출력[ 재렌더링/새로고침 ]
 }
 
 
 
-// 2. 모든글 조회
-getList();
-function getList(){
+// 2. 모든글 조회 // 페이지번호 클릭
+getList(1);
+function getList( page ){ // page : 조회할 페이지
+	
+	pageObject.page = page;
+	// 클릭된 페이지번호를 조건객체에 대입
 	
 	$.ajax({
 		url : "/jspweb/BoardInfoController" ,
 		method : "get" ,
 		data : pageObject ,
-		success : r => { 
+		success : pageDto => { console.log(pageDto)
 			
+			
+			
+			// -------------------------------- 1. 게시물 출력 ---------------------------- //
 			// 1. 출력할 위치
 			let boardTable=document.querySelector('.boardTable');
 			
@@ -54,7 +61,7 @@ function getList(){
 			</tr>`;
 				// * 서블릿으로부터 전달받은 내용[배열] 반복해서 html 구성
 				// 배열명.forEach
-				r.forEach( b => {
+				pageDto.boardList.forEach( b => {
 					html += `
 						<tr>
 							<td> ${ b.bno } </td>
@@ -67,6 +74,33 @@ function getList(){
 				} ); // for end
 			// 3. 구성된 html내용물 출력
 			boardTable.innerHTML= html;
+			// -------------------------------- 2. 페이지번호 출력 ---------------------------- //
+			
+			html = ``; // 위에서 사용된 html 초기화
+			
+			
+			// 페이지 개수만큼 페이징번호 구성
+				// 이전
+				html +=`<button onclick="getList(${page <= 1 ? page : page-1})" type="button"> < </button>`
+				// 페이지번호 버튼
+				for( let i = 1 ; i<=pageDto.totalpage; i++){
+					// 만약에 현재페이지와 i번쨰 페이지와 일치하면 class="selectpage" 추가
+					html +=`<button class="${ page == i ? 'selectpage' : '' }" onclick="getList(${i})" type="button"> ${i} </button>`;
+				}
+				// 다음 버튼 [ page >= pageDto.totalpage  ? page : page+1 만약에 현재페이지가 마지막페이지이면 고정 아니면 1증가 ]
+				html +=`<button onclick="getList(${ page >= pageDto.totalpage  ? page : page+1 })" type="button"> > </button>`;
+				
+
+			
+			// pagebox 구역에 구성된 html 대입
+			document.querySelector('.pagebox').innerHTML = html;
+			
+			// ---------------------------- 3. 게시물 수 출력 --------------------------------- //
+			let boardcount = document.querySelector('.boardcount');
+			
+			boardcount.innerHTML = ` 총 게시물 수 : ${ pageDto.totalsize } `
+			
+			
 			
 		},
 		error : e => {}

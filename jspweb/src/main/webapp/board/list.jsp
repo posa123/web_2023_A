@@ -24,13 +24,13 @@
 			
 			<div>	
 				
-				<select class="bbtn,listsize" onchange="onListSize()"> <!-- 하나의 페이지 표시할 최대 게시물수 -->
+				<select class="bbtn listsize" onchange="onListSize()"> <!-- 하나의 페이지 표시할 최대 게시물수 -->
 					<option value="10">10</option>
 					<option value="15">15</option>
 					<option value="20">20</option>
 				
 				</select>
-				<span class="boardcount"> 게시물수 : 6 </span>	<!-- 전체 게시물 수  -->
+				<span class="boardcount"> </span>	<!-- 전체 게시물 수  -->
 			</div>
 			<button class="bbtn"onclick="onWrite()" type="button">글쓰기</button>
 		</div>	
@@ -48,13 +48,7 @@
 			
 			<!-- 5. 페이징처리 구역 -->
 			<div class="pagebox">
-				<button type="button"> < </button>
-					<button type="button"> 1 </button>
-					<button type="button" class="selectpage"> 2 </button>
-					<button type="button"> 3 </button>
-					<button type="button"> 4 </button>
-					<button type="button"> 5 </button>
-				<button type="button"> > </button>
+				
 			</div>
 			<!-- 6. 검색 구역 -->
 			<select class="bbtn"> <!-- 검색 키워드 -->
