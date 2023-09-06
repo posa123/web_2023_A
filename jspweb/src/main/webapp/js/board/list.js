@@ -8,25 +8,36 @@ function onWrite() {
 	alert('로그인후 글쓰기 가능합니다.')
 	location.href="/jspweb/member/login.jsp";
 	}
-}
+} // f end
 
 /* 게시물 조회 조건 객체 */
-let pageObject = { type : 1 , bcno : 0 , listsize : 10 , page : 1 }
+let pageObject = { type : 1 , bcno : 0 , listsize : 10 , page : 1 , key : '' , keyword : ''}
 	// type : 1:전체조회 , 2:개별조회
 	// bcno : 조회할 카테고리 번호 [ 기본값은 전체보기 ]
 	// listsize : 하나의 페이지에 최대표시할 게시물수 [ 기본값은 10개 ]
 	// page : 조회할 페이지번호
+	
+// 5. 검색 버튼을 클릭했을때.
+function onSearch(){
+	pageObject.key = document.querySelector('.key').value
+	pageObject.keyword = document.querySelector('.keyword').value
+	getList(1);
+	
+} // f end
+
 // 3. 카테고리 버튼을 클릭했을때
 function onCategory(bcno){
 	console.log('클릭된 카테고리 : ' +bcno);
 	pageObject.bcno = bcno; // 조회 조건객체내 카테고리번호를 선택한 카테고리로 변경
+	pageObject.key = ''; pageObject.keyword = ''; // 검색해제
 	getList(1);
 } // f end
+
 // 4. 한페이지 최대 표시할 개수를 변경했을때.
 function onListSize(){
 	pageObject.listsize = document.querySelector('.listsize').value // 선택된 게시물수를 조회조건객체 저장
 	getList(1); // 조건이 변경되었기 때문에 다시 출력[ 재렌더링/새로고침 ]
-}
+} // f end
 
 
 
@@ -83,7 +94,7 @@ function getList( page ){ // page : 조회할 페이지
 				// 이전
 				html +=`<button onclick="getList(${page <= 1 ? page : page-1})" type="button"> < </button>`
 				// 페이지번호 버튼
-				for( let i = 1 ; i<=pageDto.totalpage; i++){
+				for( let i = pageDto.startbtn ; i<=pageDto.endbtn; i++){
 					// 만약에 현재페이지와 i번쨰 페이지와 일치하면 class="selectpage" 추가
 					html +=`<button class="${ page == i ? 'selectpage' : '' }" onclick="getList(${i})" type="button"> ${i} </button>`;
 				}
@@ -98,14 +109,16 @@ function getList( page ){ // page : 조회할 페이지
 			// ---------------------------- 3. 게시물 수 출력 --------------------------------- //
 			let boardcount = document.querySelector('.boardcount');
 			
-			boardcount.innerHTML = ` 총 게시물 수 : ${ pageDto.totalsize } `
-			
-			
-			
+			// 1. 검색이 있을때
+			if(pageObject.key == '' && pageObject.keyword == '' ) {
+				boardcount.innerHTML = ` 총 게시물 수 : ${ pageDto.totalsize } `
+			}else { // 2. 검색이 없을때
+				boardcount.innerHTML = ` 검색된 게시물 수 : ${ pageDto.totalsize } `
+			}
 		},
 		error : e => {}
 	})
-}
+} // f end
 /*
 
 	<td> ${ b.mid } / <img src="/jspweb/member/img/${ b.mimg }"/></td>
