@@ -1,4 +1,17 @@
 
+/* 썸머노트 실행 */
+$(document).ready(function() {
+	
+	let option ={
+		lang : 'ko-KR' , 
+		height : 500 ,
+		placeholder : '여기에 내용작성'
+	}
+	$('#summernote').summernote(option);
+  
+});
+
+
 // write , update , delete : js 내장함수들 존재하기 떄문에 함수명으로 사용불가
 
 function bwrite() { // write()

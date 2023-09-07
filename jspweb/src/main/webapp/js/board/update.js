@@ -1,3 +1,4 @@
+
 	// 2. 쿼리스트링(URL주소상의변수) 의 변수 가져오기
 		// 쿼리스트링 : URL?변수명=값&변수명=값&변수명=값
 	let bno = new URL(location.href).searchParams.get("bno");
@@ -15,17 +16,23 @@ function getBaord(){
 			// 응답 결과 html 대입
 			document.querySelector('.bcno').value=`${r.bcno}`
 			document.querySelector('.btitle').value=`${r.btitle}`
-			document.querySelector('.bcontent').value=`${r.bcontent}`
+			document.querySelector('.bcontent').innerHTML=`${r.bcontent}`
 			document.querySelector('.oldfile').innerHTML=`${r.bfile}`
+			$(document).ready(function() {
+	
+	let option ={
+		lang : 'ko-KR' , 
+		height : 500 ,
+		placeholder : '여기에 내용작성'
+	}
+	$('#summernote').summernote(option);
+  
+});	
 		} ,
 		error : e => {} 
-		
-		
-		
+
 	});	
-		
-		
-		
+	
 }
 function onUpdate(){
 
