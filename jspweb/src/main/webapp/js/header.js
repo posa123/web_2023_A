@@ -1,7 +1,9 @@
 
+let 헤더변수 = "헤더변수데이터"
 // 1. 현재 로그인된 회원정보 요청
 
 let loginState = false; /* 로그인 상태 true : 로그인중 false 비로그인*/
+let loginMid = ''; /* 로그인 성공된 아이디를 가지고 있는 변수 */
 getMemberInfo(); 
 
 function getMemberInfo(){
@@ -10,6 +12,7 @@ function getMemberInfo(){
 	$.ajax({
 		url : "/jspweb/MemberInfoController",
 		method : "get" ,
+		async : false, /* 비동기화 (기본값 = true) , 동기화(false) 설정하는 속성 */ 
 		data : { type : "info"} ,
 		success : r => {
 			
@@ -23,7 +26,7 @@ function getMemberInfo(){
 					<li> <a href="/jspweb/member/login.jsp">로그인</a> </li>
 					`;
 			}else{ // 로그인		
-				loginState = true;
+				loginState = true; ;loginMid = r.mid;
 				html +=`	
 					<li> ${r.mid} </li>
 					<li> <img class="hmimg" src="/jspweb/member/img/${r.mimg}"/> </li>	
