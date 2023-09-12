@@ -11,7 +11,14 @@ let clientSocket = new WebSocket(`ws://localhost:80/jspweb/ServerSocket/${loginM
 	// - 서버소켓URL에 매개변수 전달하기 [- 주로 식별자 전달 ] 서버소켓URL/데이터1/데이터2/데이터3
 	// --- 메소드 4가지 메소드 자동으로 실행 
 		// 1. (자동실행) 클라이언트소켓이 정상적으로 서버소켓 접속했을때
-	clientSocket.onopen = e => { console.log('서버와 접속이 성공'); 	} ;
+	clientSocket.onopen = e => {
+		// 1-2 : 만약에 접속을 성공하면 알림메시지 전송
+		let msg = { type : "alarm" , content : `${loginMid}님이 입장했습니다.`}
+		clientSocket.send(msg);
+		// clientSocket.send( msg ); // 문제발생 : 해당 메시지를 받는 JAVA는 JSON타입 몰라요.. 그래서 문자열 타입으로 전송.
+		clientSocket.send(JSON.stringify(msg));
+				
+	 } ;
 		// 2. (자동실행) 클라이언트소켓이 서버소켓과 연결에서 오류가 발생했을때.
 	clientSocket.onerror = e => { console.log('서버와 오류발생:'+e ); };
 		// 3. (자동실행) 클라이언트소켓이 서버소켓과 연결이 끊겼을때.
@@ -23,41 +30,66 @@ let clientSocket = new WebSocket(`ws://localhost:80/jspweb/ServerSocket/${loginM
 // 3. 서버에게 메시지 전송 
 function onSend(){
 	// 3-1 textarea 입력값 호출 
-	let msg = document.querySelector('.msg').value;
-	if( msg == ''){ alert('내용을 입력해주세요.'); return; }	
+	let msgValue = document.querySelector('.msg').value;
+	if( msgValue == '' || msgValue == '\n' ){
+		document.querySelector('.msg').value = ``; 
+		return; 
+	}	
 	// 3-2 메시지 전송 .. . 
-	clientSocket.send( msg ); 
+	
+	let msg = { type : 'message' , content : msgValue }
+	console.log(msg.msg); // java,js console 내 출력시 줄바꿈 \n 맞음... html에서의 줄바꿈 <br>
+	
+	clientSocket.send(JSON.stringify(msg));
 	// 클라이언트소켓과 연결된 서버소켓에게 메시지 전송 ----> 서버소켓의 @OnMessage 으로 이동 
+	// 3-3 메시지 전송 성공시
+	document.querySelector('.msg').value=``;
 }
 // 4. 메시지를 받았을때 후추 행동(메소드) 선언 
 function onMsg( e ){
 	console.log( e ); // e : 메시지 받았을때 발생한 이벤트 정보가 들어있는 객체
 	console.log( e.data ); // .data 속성에 전달받은 메시지 내용 
 	
-	let msg = JSON.parse( e.data );
+	let msgBox = JSON.parse( e.data ); console.log( msgBox );
 		// JSON.parse( ) 		: 문자열타입의 JSON형식을 JSON타입으로 변환 
 		// JSON.stringify( ) 	: JSON타입 을 문자열 타입 (JSON형식 유지)으로 변환 
+		console.log(msgBox.msg); // java,js console 내 출력시 줄바꿈 \n 맞음... html에서의 줄바꿈 <br>
+		// 1. 특정 문자열 찾아서 치환/바꾸기/교체
+		let content = msgBox.msg.replace('\n','<br>'); // replace( '변경할문자열 | 정규표현식 ' , '새로운문자' );
+		console.log(content);
+		// 2. 특정 문자열 찾아서 찾은 문자열 모두 치환/바꾸기/교체 => java : .replaceAll(); js : 정규표현식
+		content = msgBox.msg.replace(/\n/g,'<br>'); // /g : 모든 패턴의 문자찾기[전체] 
+		console.log(content);
+		
+		msgBox.msg = JSON.parse( content ); // 치환하고 대입.
+			console.log(msgBox);
+			
 	// 1. 어디에 출력할껀지 
 	let chatcont = document.querySelector('.chatcont')
 	// 2. 무엇을 
 	let html = ``;
+		// 만약에 메시지 타입이 알림 이면
+		if( msgBox.msg.type == 'alarm' ){
+			html = `${typeHTML( msgBox.msg )}`;
+		}
+		// 만약에 메시지 타입이 알림이 아니면[ 메시지 , 이모티콘 ]
 		// 2-2 만약에 내가 보냈으면. [ 보낸사람아이디와 로그인된사람의 아이디와 같으면 ]
-		if( msg.frommid == loginMid ){
+		else if( msgBox.frommid == loginMid ){
 				html = `<div class="rcont"> 
 							<div class="subcont">
-								<div class="date"> ${ msg.date } </div>
-								<div class="content"> ${ msg.msg } </div>
+								<div class="date"> ${ msgBox.date } </div>
+								${typeHTML( msgBox.msg )}
 							</div>
 						</div>`;
 		}else{ // 2-2 내가 보낸 내용이 아니면
 			html = `
 					<div class="lcont"> 
-						<img class="pimg" src="/jspweb/member/img/${ msg.frommimg }" />
+						<img class="pimg" src="/jspweb/member/img/${ msgBox.frommimg }" />
 						<div class="tocont">
-							<div class="name">${ msg.frommid }</div>
+							<div class="name">${ msgBox.frommid }</div>
 							<div class="subcont">
-								<div class="content"> ${ msg.msg } </div>
-								<div class="date"> ${ msg.date } </div>
+								${typeHTML( msgBox.msg )}
+								<div class="date"> ${ msgBox.date } </div>
 							</div>
 						</div>
 					</div>`
@@ -75,6 +107,74 @@ function onMsg( e ){
 	// 3. 전체 높이 값을 현재 스크롤 상단 위치에 대입
 	chatcont.scrollTop = chatcont.scrollHeight;
 }
+// 5. textarea 입력창에서 입력할때마다 이벤트 발생 함수
+function onEnterKey(){
+	// 2. 만약에 ctrl + 엔터 이면 줄바꿈
+	if( window.event.keyCode == 13 && window.event.ctrlKey ){ // 조합키 : 한번에 두개 이상 입력 가능한 키 [ ctrl.shift + alt ]
+		
+		document.querySelector('.msg').value += `\n`; return;
+		
+	} 
+	// 1. 만약에 입력한 키 가 [엔터] 이면 메시지 전송
+	if( window.event.keyCode == 13 ) { onSend(); return; }
+	
+	
+}
+// 6. 이모티콘 출력하기
+getEmo();
+function getEmo(){
+	
+	// -
+	for( let i = 1 ; i<=43 ; i++){
+		document.querySelector('.emolistbox').innerHTML
+			+= `<img onclick="onEmoSend(${i})" src="/jspweb/img/imoji/emo${i}.gif"/>`;
+	}
+	
+}
+// 7. 클리한 이모티콘 서버로 보내기
+function onEmoSend( i ){
+	// 1. msg 구성
+	let msg = {type : 'emo' , content : i }
+		// type : msg[메시지] , emo[이모티콘] , img[사진]
+		// content : 내용물
+		
+	// 2. 보내기
+	clientSocket.send( JSON.stringify(msg));
+}
+
+// 8. msg 타입에 따른 HTML 반환 함수
+function typeHTML( msg ) {
+	
+	let html = ``;
+	// 1. 메시지 타입 일때는 <div> 반환
+	if( msg.type == 'message' ){
+		html +=`<div class="content"> ${ msg.content } </div>`;
+	}
+	// 2. 이모티콘 타입
+	else if( msg.type == 'emo' ){
+		html += `<img src="/jspweb/img/imoji/emo${msg.content}.gif"/>`;
+	}
+	// 3. 만약에 알림 타입 일때는 <div> 반환
+	else if( msg.type == 'alarm'){
+		html +=`<div class="alarm"> ${msg.content} </div>`;	
+	}
+	return html;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // ------------------------------------------------------------------------------ // 
