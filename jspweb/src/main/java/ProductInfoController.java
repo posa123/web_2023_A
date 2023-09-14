@@ -4,6 +4,7 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,6 +19,8 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+import model.dao.ProductDao;
+import model.dto.MemberDto;
 import model.dto.ProductDto;
 
 /**
@@ -69,8 +72,17 @@ public class ProductInfoController extends HttpServlet {
 				else { // 2. file 필드
 					// 만약에 파일 필드이면 업로드 진행
 						System.out.println( "업로드할 파일명 : " + item.getName() ); // .getName()
-					// 6.업로드 경로 + 파일명 [ 조합 ] 
-					File fileUploadPath = new File( uploadPath +"/"+item.getName() ) ;
+					// 6.업로드 경로 + 파일명 [ 조합 ]
+						
+						// 파일명에 중복이 있을때 식별 생성
+						UUID uuid = UUID.randomUUID();
+							// UUID 클래스 : 고유성을 보장하는 ID를 만들기 위한 식별자 표준 규약 
+						String filename = uuid+"-"+item.getName().replaceAll("-", "_");
+												// 만약에 파일명에 - 하이픈 존재하면 _언더바로 변경
+												// 왜?? 파일명과 UUID 간의 식별하기 위해 구분 -하이픈 사용하기 때문에
+						// UUID[ - - - ] - 파일명
+					File fileUploadPath = new File( uploadPath +"/"+filename ) ;
+					
 						System.out.println( "업로드경로와 파일명이 조합된 경로 : " + fileUploadPath );
 					item.write( fileUploadPath ); // .write("저장할경로[파일명포함]") 파일 업로드할 경로를 file타입으로 제공 
 					// 7. 업로드 된 파일명을 Map에 저장 [ -DB에 저장할려고  ]
@@ -78,14 +90,33 @@ public class ProductInfoController extends HttpServlet {
 					imgList.put( i , item.getName()  ); // 저장시 에는 이미지번호가 필요 없음
 				}
 			}
-			// FileItem 으로 가져온 데이터들을 각 필드에 맞춰서 제품Dto 에 저장하기 
+			// FileItem 으로 가져온 데이터들을 각 필드에 맞춰서 제품Dto 에 저장하기
+			
+			// 회원번호
+			Object object = request.getSession().getAttribute("loginDto");
+			MemberDto memberDto = (MemberDto)object;
+			int mno = memberDto.getMno();
+			
+			
 			ProductDto productDto = new ProductDto(
-					Integer.parseInt( fileList.get(0).getString() ), 
-					fileList.get(1).getString(),  fileList.get(2).getString(), 
-					Integer.parseInt( fileList.get(3).getString() ), 
-					null, null, 0, imgList );
+					Integer.parseInt( fileList.get(0).getString() ),  // fileList.get(0) : name = pcno 값 호출
+					fileList.get(1).getString(),  // fileList.get(1) : name = pname 값 호출
+					fileList.get(2).getString(), // fileList.get(2) : name = pcontent 값 호출
+					Integer.parseInt( fileList.get(3).getString() ), // fileList.get(3) : name = pprice 값 호출 
+					fileList.get(4).getString(), 	// formData.set('plat' , plat );
+					fileList.get(5).getString(), 	// formData.set( 'plng' ,plng );
+					mno, // 현재 로그인된[제픔등록한] 회원의 번호 호출
+					imgList ); // 여러개 이미지든 위에서 리스트로 구성후 대입
 			
 			System.out.println( productDto );
+			
+			// Dto를 Dao처리
+			boolean result = ProductDao.getInstance().register(productDto);
+			
+			//
+			response.setContentType("application/json;charset=utf-8");
+			response.getWriter().print(result);
+			
 		}catch (Exception e) { }
 	}
 	// 2. 제품 조회 
