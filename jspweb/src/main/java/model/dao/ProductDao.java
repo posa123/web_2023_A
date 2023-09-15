@@ -14,16 +14,14 @@ public class ProductDao extends Dao{
 	public boolean register( ProductDto dto ) {
 		// 1-1 제픔 등록
 		try {
-			String sql = " insert "
-					+ "into "
-					+ "product( pcno , pname , pcontent , pprice , plat , plng , mno ) "
-					+ "values( ?, ? , ? , ? , ? , ? , ? )";
+			String sql = "insert into product( pcno , pname , pcontent , pprice , plat , plng , mno  ) "
+					+ "	values( ? , ? , ? , ? , ? , ? , ?  );";
 			// * sql insert 후 자동생성된 pk번호를 반환하는 방법
 				// .prepareStatement(sql , Statement.RETURN_GENERATED_KEYS) : 생성된 식별키를 반환
 				// ps.getGeneratedKeys()									: 식별키 반환하는 함수
 			ps = conn.prepareStatement(sql , Statement.RETURN_GENERATED_KEYS);
 			ps.setInt(1, dto.getPcno());
-			ps.setString( 2 , dto.getPcname());
+			ps.setString( 2 , dto.getPname());
 			ps.setString( 3 , dto.getPcontent());
 			ps.setInt(4, dto.getPprice());
 			ps.setString( 5 , dto.getPlat());
