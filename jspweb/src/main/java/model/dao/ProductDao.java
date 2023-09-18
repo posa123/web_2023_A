@@ -112,10 +112,14 @@ public class ProductDao extends Dao{
 	public List<ProductDto> findByLatLng( String east  , String west ,  String south ,  String north){
 		try {	// 동 경도보다 크고 서 경도보다 작고 남 위도보다 크고 북 위도 작고
 			List<ProductDto> list = new ArrayList<>();
-			String sql = "select * from product where ? >= plng and ? <= plng and ? >= plat and ? <= plat order by pdate";
-			ps = conn.prepareStatement(sql);
-			ps.setString(1, east);ps.setString(2, west);ps.setString(3, south);ps.setString(4, north);
-			rs=ps.executeQuery();
+	         String sql = "select pno from product where ? >= plat and ? <= plat and ? >= plng and ? <= plng order by pdate desc";
+	         
+	         ps = conn.prepareStatement(sql);
+	         ps.setString(1, north);
+	         ps.setString(2, south);
+	         ps.setString(3, east);
+	         ps.setString(4, west);
+	         rs = ps.executeQuery();
 			while(rs.next()) { list.add(findByPno(rs.getInt("pno") ) ) ;} return list;
 		} catch (Exception e) {System.out.println(e);}
 		return null;

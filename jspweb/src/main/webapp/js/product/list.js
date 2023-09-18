@@ -71,18 +71,7 @@ var clusterer = new kakao.maps.MarkerClusterer({
     disableClickZoom: true // 클러스터 마커를 클릭했을 때 지도가 확대되지 않도록 설정한다
 });
 
-$.ajax({
-	url : "/jspweb/ProductInfoController" , method : "get" ,
-	data : { type : "findByAll" },
-	success : jsonArray => { console.log( jsonArray ); 
-		var markers = jsonArray.map( (p) => {
-	        return new kakao.maps.Marker({
-	            position : new kakao.maps.LatLng( p.plat, p.plng )
-	        });
-	    });
-		clusterer.addMarkers(markers);
-	}
-})
+
 kakao.maps.event.addListener(clusterer, 'clusterclick', function(cluster) {
     var level = map.getLevel()-1;
     map.setLevel(level, {anchor: cluster.getCenter()});
@@ -95,15 +84,12 @@ function getInfo() {
     var neLatLng = bounds.getNorthEast();   // 영역의 북동쪽 좌표를 얻어옵니다 
 
 
-    let 동 = neLatLng.getLng()
-    let 서 =	swLatLng.getLng()
-    let 남 = swLatLng.getLat()
     let 북 = neLatLng.getLat()
+    let 남 =	swLatLng.getLat()
+    let 서 = swLatLng.getLng()
+    let 동 = neLatLng.getLng()
     
-    conosle.log("동 : " +동)
-    conosle.log("서 : " +서)
-    conosle.log("남 : " +남)
-    conosle.log("북 : " +북)
+
     //
     findByLatLng( 동 , 서 , 남 , 북 );
     
@@ -113,6 +99,7 @@ function findByLatLng( east , west , south , north ) {
 	$.ajax({
 		url : "/jspweb/ProductInfoController" ,
 		method : "get" ,
+		async : false, /* ajax통신은 기본적으로 비동기통신 이므로 */
 		data : { type : "findByLatLng" , 
 		east : east  , west : west , south: south , north: north 
 		} ,
@@ -127,8 +114,8 @@ function findByLatLng( east , west , south , north ) {
 		
 	})
 }
-kakao.maps.event.addListner(map,'dragend',function(){
-	
+kakao.maps.event.addListener(map,'dragend',function(){
+	getInfo()
 });
 
 
