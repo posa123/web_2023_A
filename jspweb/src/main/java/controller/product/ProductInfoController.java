@@ -47,6 +47,8 @@ public class ProductInfoController extends HttpServlet {
 		// * commons.jar 이용한 업로드 구현 
 		// commons-io.jar ,  commons-fileupload.jar 빌드 필요!!
 		
+		request.setCharacterEncoding("utf-8");
+		
 		// 1. 저장경로 [ 첨부파일이 저장될 폴더 위치 ] 
 		String uploadPath = request.getServletContext().getRealPath("/product/img");
 		
@@ -90,7 +92,8 @@ public class ProductInfoController extends HttpServlet {
 					item.write( fileUploadPath ); // .write("저장할경로[파일명포함]") 파일 업로드할 경로를 file타입으로 제공 
 					// 7. 업로드 된 파일명을 Map에 저장 [ -DB에 저장할려고  ]
 					i++;
-					imgList.put( i , item.getName()  ); // 저장시 에는 이미지번호가 필요 없음
+					imgList.put( i , filename  ); // 저장시 에는 이미지번호가 필요 없음
+					
 				}
 			}
 			// FileItem 으로 가져온 데이터들을 각 필드에 맞춰서 제품Dto 에 저장하기
@@ -117,7 +120,7 @@ public class ProductInfoController extends HttpServlet {
 			boolean result = ProductDao.getInstance().register(productDto);
 			
 			//
-			response.setContentType("application/json;charset=utf-8");
+			response.setContentType("application/json;charset=UTF-8");
 			response.getWriter().print(result);
 			
 		}catch (Exception e) { }
@@ -154,7 +157,7 @@ public class ProductInfoController extends HttpServlet {
 			json = mapper.writeValueAsString(result);
 		}
 		
-		response.setCharacterEncoding("application/json;charset=UTF-8");
+		response.setContentType("application/json;charset=UTF-8");
 		response.getWriter().print(json);
 	}
 	// 3. 제품 수정 

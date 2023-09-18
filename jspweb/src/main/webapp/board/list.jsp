@@ -43,7 +43,7 @@
 		<!-- 4. 테이블 구역 -->
 		<table class="boardTable"></table>
 		
-		<div class="boardbottom">
+		<div class="boardbottom"> <!-- 하단 구역 -->
 			
 			<!-- 5. 페이징처리 구역 -->
 			<div class="pagebox">
@@ -57,7 +57,7 @@
 			</select>
 			<input class="keyword" type="text"> <!-- 검색내용 -->
 			<button onclick="onSearch()"class="bbtn" type="button">검색</button>
-		</div>
+		</div><!-- 하단 구역 end --> 
 	</div>
 		
 
