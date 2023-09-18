@@ -111,7 +111,12 @@ public class ProductDao extends Dao{
 		// 2. 현재카카오지도내 보고있는 동서남북 기준내 제품들을 출력 함수
 	public List<ProductDto> findByLatLng( String east  , String west ,  String south ,  String north){
 		try {	// 동 경도보다 크고 서 경도보다 작고 남 위도보다 크고 북 위도 작고
-			String sql = "select * from product where ?>=plng and ? <= plng ?>=plat ?<=plat";
+			List<ProductDto> list = new ArrayList<>();
+			String sql = "select * from product where ? >= plng and ? <= plng and ? >= plat and ? <= plat order by pdate";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, east);ps.setString(2, west);ps.setString(3, south);ps.setString(4, north);
+			rs=ps.executeQuery();
+			while(rs.next()) { list.add(findByPno(rs.getInt("pno") ) ) ;} return list;
 		} catch (Exception e) {System.out.println(e);}
 		return null;
 	}

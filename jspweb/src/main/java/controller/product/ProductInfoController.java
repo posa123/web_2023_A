@@ -47,8 +47,6 @@ public class ProductInfoController extends HttpServlet {
 		// * commons.jar 이용한 업로드 구현 
 		// commons-io.jar ,  commons-fileupload.jar 빌드 필요!!
 		
-		request.setCharacterEncoding("utf-8");
-		
 		// 1. 저장경로 [ 첨부파일이 저장될 폴더 위치 ] 
 		String uploadPath = request.getServletContext().getRealPath("/product/img");
 		
