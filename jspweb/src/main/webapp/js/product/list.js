@@ -59,11 +59,13 @@ kakao.maps.event.addListener(clusterer, 'clusterclick', function(cluster) {
    /* 
 	https://apis.map.kakao.com/web/sample/
 */
+
+// 0. 카카오맵
 var map = new kakao.maps.Map(document.getElementById('map'), { // 지도를 표시할 div
     center : new kakao.maps.LatLng(36.2683, 127.6358), // 지도의 중심좌표
     level : 12 // 지도의 확대 레벨
 });
-
+// 0. 카카오맵 클러스터 [ 마커 여러개일때 집합모양 ] 
 var clusterer = new kakao.maps.MarkerClusterer({
     map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체
     averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
@@ -76,6 +78,9 @@ kakao.maps.event.addListener(clusterer, 'clusterclick', function(cluster) {
     var level = map.getLevel()-1;
     map.setLevel(level, {anchor: cluster.getCenter()});
 });
+
+
+// 1. 현재 보고 있는 지도의 동서남북 좌표 얻기
 getInfo()
 function getInfo() {
 
@@ -94,8 +99,12 @@ function getInfo() {
     findByLatLng( 동 , 서 , 남 , 북 );
     
 }
+
 // 2. 현재카카오지도내 보고있는 동서남북 기준내 제품들을 출력 함수
 function findByLatLng( east , west , south , north ) {
+	// * 클러스터내 모든 마커를 초기화
+	clusterer.clear();
+	
 	$.ajax({
 		url : "/jspweb/ProductInfoController" ,
 		method : "get" ,
@@ -104,12 +113,50 @@ function findByLatLng( east , west , south , north ) {
 		east : east  , west : west , south: south , north: north 
 		} ,
 		success : jsonArray => { console.log( jsonArray ); 
+		
+		
+		
+		// ----------------------------------------------------------------- //
 		var markers = jsonArray.map( (p) => {
 	        return new kakao.maps.Marker({
 	            position : new kakao.maps.LatLng( p.plat, p.plng )
 	        });
 	    });
 		clusterer.addMarkers(markers);
+		
+		// ---------------------------------------------------------------- //
+		
+		let sidebar = document.querySelector('.sidebar')
+		
+		let html = ``;
+		
+			//
+			jsonArray.forEach( (p)=> {
+				html +=`<div class="card mb-3" style="max-width: 540px;">
+				<div class="row g-0">
+				
+			    	<div class="col-md-4">
+			      		<img src="/jspweb/product/img/${Object.values(p.imgList)[0] }" class="img-fluid rounded-start" alt="...">
+			    	</div>
+			    	
+			    <div class="col-md-8">
+			    	<div class="card-body">
+			        	<h5 class="card-title">${p.pname}</h5>
+			        	<p class="card-text">
+			        		<div> ${p.pcontent}</div>
+			        		<div> ${p.pprice.toLocaleString()}원</div>
+			        	</p>
+			        	
+			      	</div>
+			    </div>
+			    
+			  </div>
+			</div>`;
+			})
+		
+		
+		sidebar.innerHTML = html;
+		
 		}
 		
 	})
