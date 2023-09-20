@@ -102,6 +102,7 @@ function getInfo() {
 
 // 2. 현재카카오지도내 보고있는 동서남북 기준내 제품들을 출력 함수
 function findByLatLng( east , west , south , north ) {
+	
 	// * 클러스터내 모든 마커를 초기화
 	clusterer.clear();
 	
@@ -131,12 +132,14 @@ function findByLatLng( east , west , south , north ) {
 		let html = ``;
 		
 			//
-			jsonArray.forEach( (p)=> {
+			jsonArray.forEach( p=> {
 				html +=`<div class="card mb-3" style="max-width: 540px;">
 				<div class="row g-0">
 				
 			    	<div class="col-md-4">
-			      		<img src="/jspweb/product/img/${Object.values(p.imgList)[0] }" class="img-fluid rounded-start" alt="...">
+			    		<a href="/jspweb/product/view.jsp?pno=${p.pno}">
+			      			<img src="/jspweb/product/img/${Object.values(p.imgList)[0] }" class="img-fluid rounded-start" alt="...">
+			      		</a>
 			    	</div>
 			    	
 			    <div class="col-md-8">
@@ -146,15 +149,12 @@ function findByLatLng( east , west , south , north ) {
 			        		<div> ${p.pcontent}</div>
 			        		<div> ${p.pprice.toLocaleString()}원</div>
 			        	</p>
-			        	
 			      	</div>
 			    </div>
-			    
 			  </div>
 			</div>`;
 			})
-		
-		
+
 		sidebar.innerHTML = html;
 		
 		}

@@ -15,7 +15,7 @@
 	
 
 		<!-- 지도를 표시할 div 입니다 -->
-		<div id="map" style="">
+		<div id="map">
 		</div>
 		
 		<!-- 사이드바 구역 -->

@@ -21,7 +21,9 @@ function findByTop( count ){
 					
 					html+=`<div class="col">
 						    <div class="card">
-						      <img src="/jspweb/product/img/${firstImg}" class="card-img-top" alt="...">
+						    	<a href="/jspweb/product/view.jsp?pno=${p.pno}">
+						      		<img src="/jspweb/product/img/${firstImg}" class="card-img-top" alt="...">
+						    	 </a>
 						      <div class="card-body">
 						        <h5 class="card-title">${p.pname}</h5>
 						        <p class="card-text">
