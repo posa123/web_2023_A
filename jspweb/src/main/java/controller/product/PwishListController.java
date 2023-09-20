@@ -73,7 +73,7 @@ public class PwishListController extends HttpServlet {
 
 
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		int pno = Integer.parseInt(request.getParameter("pno"));
 	}
 
 }
