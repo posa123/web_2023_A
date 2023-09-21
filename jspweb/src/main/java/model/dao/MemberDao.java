@@ -1,6 +1,7 @@
 package model.dao;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import model.dto.MemberDto;
@@ -131,14 +132,19 @@ public class MemberDao extends Dao{
 	}
 	// 11. 내 포인트 사용 내역 전체 출력하는 함수
 	public List<MpointDto> getPointList( int mno ){
+		List<MpointDto> list = new ArrayList<>();
 		try {
 			
 			String sql = "select * from mpoint where mno =?";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1,mno);
 			rs = ps.executeQuery();
-			while( rs.next()) {}
+			while( rs.next()) { 
+				MpointDto dto = new MpointDto(rs.getString(1),rs.getInt(2), rs.getLong(3), rs.getString(4), rs.getString(5));
+				list.add(dto);
+				
+			}
 		} catch (Exception e) {e.getStackTrace();}
-		return null;
+		return list;
 	}
 }
