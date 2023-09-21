@@ -135,7 +135,6 @@ public class MemberDao extends Dao{
 			
 			String sql = "select * from mpoint where mno =?";
 			ps = conn.prepareStatement(sql);
-			ps = conn.prepareStatement(sql);
 			ps.setInt(1,mno);
 			rs = ps.executeQuery();
 			while( rs.next()) {}
