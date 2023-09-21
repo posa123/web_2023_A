@@ -35,8 +35,6 @@ function findByPno( pno ){
 			document.querySelector('.pname').innerHTML = `${jsonObject.pname}`
 			document.querySelector('.pprice').innerHTML = `${jsonObject.pprice.toLocaleString()}원`
 			document.querySelector('.pcontent').innerHTML = `${jsonObject.pcontent}`
-			
-			
 		
 		}
 	})
