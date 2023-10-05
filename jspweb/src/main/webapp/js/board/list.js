@@ -105,7 +105,7 @@ function getList( page ){ // page : 조회할 페이지
 			
 			// pagebox 구역에 구성된 html 대입
 			document.querySelector('.pagebox').innerHTML = html;
-			r
+			
 			// ---------------------------- 3. 게시물 수 출력 --------------------------------- //
 			let boardcount = document.querySelector('.boardcount');
 			
